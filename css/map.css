@@ -1,0 +1,45 @@
+/* 地圖頁專用 */
+
+/* ==============================
+   11. 村落地圖
+============================== */
+
+.map {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid #5b4048;
+
+  background:
+    radial-gradient(
+      ellipse,
+      #39252c,
+      #111014 70%
+    );
+}
+
+.place {
+  padding: 24px 12px;
+  text-align: center;
+  border: 1px solid #76515b;
+  background: #171216;
+  transition: .3s;
+}
+
+.place:hover {
+  background: #351b25;
+  box-shadow: 0 0 22px #a12c4644;
+  transform: scale(1.02);
+}
+
+.place small {
+  display: block;
+  color: #b8a49d;
+  font-size: 12px;
+}
+
+/* 地圖頁響應式設定 */
+@media (max-width: 480px) {
+  .map { grid-template-columns: 1fr 1fr; }
+}

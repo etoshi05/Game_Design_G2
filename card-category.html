@@ -1,0 +1,160 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>卡牌分類圖鑑｜夜路・番婆</title>
+
+  <!-- 共用樣式 -->
+  <link rel="stylesheet" href="css/common.css">
+
+  <!-- 分類圖鑑專用樣式 -->
+  <link rel="stylesheet" href="css/card-category.css">
+</head>
+
+<body>
+
+  <!-- 網站導覽列 -->
+  <header class="topbar">
+    <div class="wrap nav">
+
+      <a class="brand" href="index.html">
+        夜路<span>・</span>番婆
+      </a>
+
+      <button
+        class="menu"
+        id="menu"
+        aria-label="開啟選單">
+        ☰
+      </button>
+
+      <nav class="navlinks" id="navlinks">
+        <a href="index.html">首頁</a>
+        <a href="story.html">故事背景</a>
+        <a href="rules.html">遊戲介紹</a>
+        <a href="roles.html">角色圖鑑</a>
+        <a href="cards.html">卡牌圖鑑</a>
+        <a href="map.html">村落地圖</a>
+        <a href="play.html">線上遊戲</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- 頁面主視覺 -->
+  <section class="page-hero">
+    <div class="wrap">
+
+      <div class="kicker">CARD ARCHIVE</div>
+
+      <h1>卡牌分類圖鑑</h1>
+
+      <p>
+        探索卡牌內容，尋找隱藏在夜路中的線索。
+      </p>
+
+    </div>
+  </section>
+
+  <main>
+
+    <section class="card-category">
+
+      <div class="card-category__top">
+
+        <div>
+
+          <a href="cards.html">
+            ← 返回卡牌圖鑑
+          </a>
+
+          <h1 data-category-title>
+            卡牌圖鑑
+          </h1>
+
+        </div>
+
+        <!-- 卡牌搜尋 -->
+        <input
+          class="card-category__search"
+          data-card-search
+          type="search"
+          placeholder="搜尋卡牌名稱…"
+          aria-label="搜尋卡牌">
+
+      </div>
+
+      <!-- 卡牌數量 -->
+      <p
+        class="card-category__count"
+        data-card-count>
+      </p>
+
+      <!-- 卡牌展示區 -->
+      <section
+        class="card-archive-grid"
+        data-card-grid
+        aria-live="polite">
+      </section>
+
+    </section>
+
+  </main>
+
+  <!-- 卡牌放大檢視視窗 -->
+  <div
+    class="card-modal"
+    data-card-modal
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-label="卡牌放大檢視">
+
+    <div class="card-modal__panel">
+
+      <button
+        class="card-modal__close"
+        data-modal-close
+        type="button"
+        aria-label="關閉">
+        ×
+      </button>
+
+      <img
+        class="card-modal__image"
+        data-modal-image
+        alt="卡牌放大圖片">
+
+    </div>
+
+  </div>
+
+  <!-- 網站頁尾 -->
+  <footer class="footer">
+    <div class="wrap">
+
+      《夜路・番婆》｜合作推理・民俗恐怖・生存逃脫
+
+      <br>
+
+      內容依設計團隊提供之《桌遊說明書》與《遊戲實作》整理。
+      僅供課程展示、學習與非商業遊玩使用。© 2026 設計團隊。
+
+    </div>
+  </footer>
+
+  <!-- 共用 JS -->
+  <script src="js/common.js"></script>
+
+  <!-- 卡牌資料 -->
+  <script src="js/card-data.js"></script>
+
+  <!-- 分類圖鑑 JS -->
+  <script src="js/card-category.js"></script>
+
+</body>
+</html>

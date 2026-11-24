@@ -1,0 +1,13 @@
+/* 卡牌展示廊：可獨立載入於 cards.html */
+.card-gallery { overflow: hidden; padding: clamp(28px, 5vw, 64px) 0; }
+.card-gallery__intro { text-align: center; margin: 0 auto 28px; padding: 0 20px; }
+.card-gallery__intro p { opacity: .75; }
+.card-gallery__row { overflow: hidden; margin: 18px 0; }
+.card-gallery__track { display: flex; width: max-content; gap: 18px; animation: card-marquee 70s linear infinite; }
+.card-gallery__row--reverse .card-gallery__track { animation-direction: reverse; animation-duration: 82s; }
+.card-gallery__row:hover .card-gallery__track { animation-play-state: paused; }
+.gallery-card { display: block; flex: 0 0 clamp(130px, 15vw, 210px); overflow: hidden; border-radius: 12px; transform: translateZ(0); transition: transform .25s ease, filter .25s ease; filter: saturate(.88); }
+.gallery-card:hover, .gallery-card:focus-visible { transform: translateY(-8px) scale(1.045); filter: saturate(1.08); z-index: 2; outline: 2px solid var(--gold, #c9a45c); outline-offset: 3px; }
+.gallery-card img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+@keyframes card-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .card-gallery__track { animation: none; } }

@@ -1,0 +1,136 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>卡牌圖鑑｜夜路・番婆</title>
+
+  <!-- 共用樣式 -->
+  <link rel="stylesheet" href="css/common.css">
+
+  <!-- 卡牌展示廊專用樣式 -->
+  <link rel="stylesheet" href="css/cards-gallery.css">
+</head>
+
+<body>
+
+  <!-- 網站導覽列 -->
+  <header class="topbar">
+    <div class="wrap nav">
+
+      <a class="brand" href="index.html">
+        夜路<span>・</span>番婆
+      </a>
+
+      <button
+        class="menu"
+        id="menu"
+        aria-label="開啟選單">
+        ☰
+      </button>
+
+      <nav class="navlinks" id="navlinks">
+        <a href="index.html">首頁</a>
+        <a href="story.html">故事背景</a>
+        <a href="rules.html">遊戲介紹</a>
+        <a href="roles.html">角色圖鑑</a>
+        <a href="cards.html">卡牌圖鑑</a>
+        <a href="map.html">村落地圖</a>
+        <a href="play.html">線上遊戲</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- 頁面主視覺 -->
+  <section class="page-hero">
+    <div class="wrap">
+
+      <div class="kicker">04 / CARD GALLERY</div>
+
+      <h1>卡牌收藏館</h1>
+
+      <p>
+        每張卡牌都藏著不同的秘密，
+        點擊卡牌探索完整內容。
+      </p>
+
+    </div>
+  </section>
+
+  <main>
+
+    <!-- 卡牌動態展示廊 -->
+    <section class="card-gallery">
+
+      <div class="card-gallery__intro">
+
+        <div class="kicker">
+          NIGHT ROAD ARCHIVE
+        </div>
+
+        <h2 class="section-title">
+          探索卡牌世界
+        </h2>
+
+        <p class="lead">
+          選擇想探索的卡牌類別，進入專屬圖鑑。
+        </p>
+
+      </div>
+
+      <!-- 上排：往右移動 -->
+      <div class="card-gallery__row">
+
+        <div
+          class="card-gallery__track"
+          data-gallery-track="a">
+        </div>
+
+      </div>
+
+      <!-- 下排：往左移動 -->
+      <div class="card-gallery__row card-gallery__row--reverse">
+
+        <div
+          class="card-gallery__track"
+          data-gallery-track="b">
+        </div>
+
+      </div>
+
+      <p class="gallery-hint">
+        滑鼠移入卡牌可暫停動畫，點擊進入分類圖鑑
+      </p>
+
+    </section>
+
+  </main>
+
+  <!-- 網站頁尾 -->
+  <footer class="footer">
+    <div class="wrap">
+
+      《夜路・番婆》｜合作推理・民俗恐怖・生存逃脫
+
+      <br>
+
+      內容依設計團隊提供之《桌遊說明書》與《遊戲實作》整理。
+      僅供課程展示、學習與非商業遊玩使用。© 2026 設計團隊。
+
+    </div>
+  </footer>
+
+  <!-- 共用 JS -->
+  <script src="js/common.js"></script>
+
+  <!-- 卡牌資料 -->
+  <script src="js/card-data.js"></script>
+
+  <!-- 卡牌展示廊 JS -->
+  <script src="js/gallery.js"></script>
+
+</body>
+</html>

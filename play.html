@@ -1,0 +1,181 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>線上遊戲｜夜路・番婆</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/play.css">
+<body>
+  <!-- 導覽列 -->
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">夜路<span>・</span>番婆</a>
+
+      <button class="menu" id="menu" aria-label="開啟選單">
+        ☰
+      </button>
+
+      <nav class="navlinks" id="navlinks">
+        <a href="index.html">首頁</a>
+        <a href="story.html">故事背景</a>
+        <a href="rules.html">遊戲介紹</a>
+        <a href="roles.html">角色圖鑑</a>
+        <a href="cards.html">卡牌圖鑑</a>
+        <a href="map.html">村落地圖</a>
+        <a href="play.html">線上遊戲</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 頁面標題 -->
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="kicker">06 / PLAY THE NIGHT</div>
+      <h1>線上遊戲體驗</h1>
+      <p>
+        在六回合內探索、驗證規則、恢復精神值，
+        並取得逃離所需條件。
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <section>
+      <div class="wrap fade-in" data-game>
+
+        <!-- 遊戲說明 -->
+        <p class="lead">
+          此區為依照桌遊目標製作的簡化互動示範。
+          正式遊戲的規則真偽、線索對應、卡牌效果與地點開放，
+          仍須依實體卡牌及主持人事先設定的隱藏答案裁定；
+          示範操作不代表正式牌組抽取結果。
+        </p>
+
+        <!-- 遊戲主畫面 -->
+        <div class="game-shell">
+
+          <!-- 回合資訊 -->
+          <div class="game-head">
+            <div>
+              <div class="eyebrow">NIGHT PROGRESS</div>
+              <div class="round" id="roundLabel">
+                第 1 / 6 回合
+              </div>
+            </div>
+
+            <button class="reset" id="reset">
+              重新開始
+            </button>
+          </div>
+
+          <!-- 遊戲數值 -->
+          <div class="meters">
+
+            <div class="meter">
+              <small>精神值</small>
+              <b id="sanity">4 / 4</b>
+
+              <div class="bar">
+                <i id="sanityBar"></i>
+              </div>
+            </div>
+
+            <div class="meter">
+              <small>已驗證有效規則</small>
+              <b id="rules">0 / 2</b>
+            </div>
+
+            <div class="meter">
+              <small>逃生線索</small>
+              <b id="clues">0 / 2</b>
+            </div>
+
+            <div class="meter">
+              <small>出口信物</small>
+              <b id="token">未取得</b>
+            </div>
+
+          </div>
+
+          <!-- 事件區 -->
+          <div class="event">
+            <small>TONIGHT'S OMEN</small>
+
+            <h3 id="eventTitle">
+              門外的三次敲門
+            </h3>
+
+            <p id="eventText">
+              夜深了，老屋外突然傳來三次敲門聲。
+              你要調查門外，還是先確認規則？
+            </p>
+          </div>
+
+          <!-- 行動選擇 -->
+          <h3 style="font-size: 16px; margin: 20px 0 10px">
+            選擇本回合行動
+          </h3>
+
+          <div class="game-actions">
+            <button class="action" data-action="explore">
+              探索
+            </button>
+
+            <button class="action" data-action="verify">
+              驗證規則
+            </button>
+
+            <button class="action" data-action="rest">
+              休息
+            </button>
+
+            <button class="action" data-action="escape">
+              前往出口
+            </button>
+          </div>
+
+          <!-- 遊戲提醒 -->
+          <p class="notice">
+            每回合選擇一項行動。
+            第六回合結束時，若未完成所有條件，全隊逃離失敗。
+          </p>
+
+          <!-- 遊戲紀錄 -->
+          <h3 style="font-size: 15px; margin: 22px 0 8px">
+            夜路紀錄
+          </h3>
+
+          <div class="log" id="log">
+            <p>
+              — 你們踏入迷霧聚落。夜晚開始了。
+            </p>
+
+            <p>
+              — 勝利需要：2 條有效規則、2 張逃生線索、
+              出口信物，以及正式逃離行動。
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <div class="wrap">
+      《夜路・番婆》｜合作推理・民俗恐怖・生存逃脫
+      <br>
+      內容依設計團隊提供之《桌遊說明書》與《遊戲實作》整理。
+      僅供課程展示、學習與非商業遊玩使用。© 2026 設計團隊。
+    </div>
+  </footer>
+
+    <script src="js/common.js"></script>
+  <script src="js/play.js"></script>
+</body>
+
+</html>

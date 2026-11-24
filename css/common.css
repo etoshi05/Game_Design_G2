@@ -1,0 +1,423 @@
+/* 全站共用：字體、色彩、導覽列、按鈕、通用內容元件、頁尾與無障礙設定 */
+
+/* ==============================
+   1. 字體與全域設定
+============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap');
+
+:root {
+  --bg: #09090b;
+  --panel: #151216;
+  --panel2: #21171d;
+  --red: #9d2941;
+  --red2: #c04b5d;
+  --cream: #eee2d5;
+  --muted: #b0a19a;
+  --line: #49333b;
+  --gold: #c5a77a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Noto Serif TC', serif;
+  line-height: 1.75;
+}
+
+a {
+  color: inherit;
+}
+
+.wrap {
+  width: min(1120px, 92%);
+  margin: auto;
+}
+
+/* ==============================
+   2. 導覽列
+============================== */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #09090bf2;
+  border-bottom: 1px solid #39272e;
+  backdrop-filter: blur(14px);
+}
+
+.nav {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  text-decoration: none;
+  font-weight: 900;
+  letter-spacing: .18em;
+  font-size: 18px;
+}
+
+.brand span {
+  color: var(--red2);
+}
+
+.navlinks {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.navlinks a {
+  text-decoration: none;
+  color: #c8bcb5;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.navlinks a:hover,
+.navlinks a.active {
+  color: #fff;
+  border-color: var(--red2);
+}
+
+.menu {
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--cream);
+  padding: 7px 11px;
+}
+
+/* ==============================
+   4. 按鈕
+============================== */
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #a74a5b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #9d2941,
+      #5d1b2a
+    );
+
+  color: #fff;
+  padding: 11px 21px;
+  letter-spacing: .08em;
+  box-shadow: 0 8px 24px #0007;
+  transition: .25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px #a12c4655;
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: #76525c;
+  color: #eadbd3;
+}
+
+/* ==============================
+   6. 內頁標題區
+============================== */
+
+.page-hero {
+  padding: 76px 0 52px;
+
+  background:
+    radial-gradient(
+      ellipse at 80% 0%,
+      #4b202b,
+      transparent 48%
+    ),
+    linear-gradient(
+      180deg,
+      #171116,
+      #09090b
+    );
+
+  border-bottom: 1px solid #302229;
+}
+
+.page-hero h1 {
+  font-size: clamp(34px, 6vw, 58px);
+  margin: 10px 0;
+  letter-spacing: .12em;
+}
+
+.page-hero p {
+  color: var(--muted);
+  max-width: 720px;
+}
+
+/* ==============================
+   7. 主要內容區
+============================== */
+
+main section {
+  padding: 64px 0;
+  border-bottom: 1px solid #211c20;
+}
+
+.section-title {
+  font-size: 30px;
+  letter-spacing: .1em;
+  margin: 5px 0 10px;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 720px;
+  margin: 0 0 28px;
+}
+
+/* ==============================
+   8. 卡片與網格
+============================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.card {
+  background:
+    linear-gradient(
+      145deg,
+      #1c171b,
+      #100e11
+    );
+
+  border: 1px solid #3d2c33;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #a85a68;
+
+  box-shadow:
+    0 14px 34px #0009,
+    0 0 22px #8e2a3c22;
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 9px;
+  color: #e8cbc5;
+}
+
+.card p {
+  color: #bcaea7;
+  margin: 0;
+  font-size: 14px;
+}
+
+.tag {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+
+/* ==============================
+   13. 頁尾與淡入動畫
+============================== */
+
+.footer {
+  padding: 32px 0;
+  color: #847975;
+  font-size: 12px;
+  text-align: center;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .8s, transform .8s;
+}
+
+.fade-in.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==============================
+   17. 減少動態效果設定
+============================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+
+/* =================================
+   角色卡牌選擇區
+================================= */
+
+.character-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* =================================
+   下方角色卡牌翻轉效果
+================================= */
+
+.character-option {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  padding: 0;
+  border: 2px solid #49333b;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1000px;
+  overflow: visible;
+  border-radius: 8px;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+.option-inner {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.2,.7,.3,1);
+}
+
+/* 卡牌正反面 */
+.option-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.option-face img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* 卡背 */
+.option-back {
+  transform: rotateY(0deg);
+}
+
+/* 卡牌正面 */
+.option-front {
+  transform: rotateY(180deg);
+}
+
+/* 滑鼠移入、鍵盤聚焦、選取後翻面 */
+.character-option:hover .option-inner,
+.character-option:focus-visible .option-inner,
+.character-option.active .option-inner {
+  transform: rotateY(180deg);
+}
+
+/* 卡牌選取效果 */
+.character-option.active {
+  border-color: var(--red2);
+  box-shadow: 0 0 20px #c04b5d66;
+}
+
+/* 滑鼠移入光影 */
+.character-option:hover {
+  border-color: var(--gold);
+  box-shadow: 0 10px 25px #0009;
+  transform: translateY(-5px);
+}
+
+/* 鍵盤操作提示 */
+.character-option:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* =================================
+   全站共用響應式設定
+================================= */
+@media (max-width: 800px) {
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #0d0b0e;
+    padding: 16px 5%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navlinks.open { display: flex; }
+  .menu { display: block; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  .two { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+  .page-hero { padding: 56px 0 38px; }
+}

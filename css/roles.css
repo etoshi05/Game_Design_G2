@@ -1,0 +1,284 @@
+
+/* =================================
+   角色圖鑑專用 CSS
+================================= */
+
+
+/* =================================
+   1. 上方角色展示區
+================================= */
+
+.character-display {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: center;
+  gap: 40px;
+
+  width: 100%;
+  max-width: 900px;
+  margin: 35px auto 45px;
+}
+
+
+/* =================================
+   2. 上方大張角色卡
+================================= */
+
+.selected-card {
+  width: 260px;
+  aspect-ratio: 2 / 3;
+
+  margin: 0 auto;
+
+  background: #151216;
+  border: 3px solid var(--gold);
+  border-radius: 8px;
+
+  overflow: hidden;
+  box-shadow: 0 12px 35px #0009;
+
+  perspective: 1000px;
+  cursor: pointer;
+
+  transition: box-shadow .3s ease;
+}
+
+.selected-card:hover {
+  box-shadow: 0 15px 42px #c5a77a55;
+}
+
+.selected-card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transition: transform .55s ease;
+}
+
+/* 上方大卡牌翻轉 */
+.selected-card.is-flipping img {
+  transform: rotateY(90deg);
+}
+
+/* 鍵盤操作提示 */
+.selected-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
+}
+
+
+/* =================================
+   3. 右側角色介紹
+================================= */
+
+.character-info {
+  width: 100%;
+  min-width: 0;
+  position: static;
+}
+
+.character-info h2 {
+  color: var(--cream);
+  margin: 12px 0 20px;
+}
+
+.character-info h3 {
+  color: #e8cbc5;
+  margin: 22px 0 10px;
+}
+
+.character-info p {
+  color: #c8bcb5;
+  line-height: 1.9;
+}
+
+.character-divider {
+  width: 55px;
+  height: 2px;
+  background: var(--gold);
+  margin: 18px 0;
+}
+
+.character-number {
+  margin-top: 24px;
+  color: var(--gold);
+  letter-spacing: .12em;
+}
+
+
+/* =================================
+   4. 下方角色選擇區
+================================= */
+
+.character-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+
+/* =================================
+   5. 下方角色卡牌外框
+================================= */
+
+.character-option {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  padding: 0;
+  border: 2px solid #49333b;
+
+  background: transparent;
+  cursor: pointer;
+
+  perspective: 1000px;
+  overflow: visible;
+  border-radius: 8px;
+
+  transition:
+    border-color .3s,
+    box-shadow .3s,
+    transform .3s;
+}
+
+
+/* 卡牌內層 */
+.option-inner {
+  display: block;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.2,.7,.3,1);
+}
+
+
+/* =================================
+   6. 卡牌正反面
+================================= */
+
+.option-face {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+  border-radius: 6px;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.option-face img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+}
+
+/* 卡背 */
+.option-back {
+  transform: rotateY(0deg);
+}
+
+/* 卡牌正面 */
+.option-front {
+  transform: rotateY(180deg);
+}
+
+
+/* =================================
+   7. 下方卡牌翻轉
+================================= */
+
+.character-option:hover .option-inner,
+.character-option:focus-visible .option-inner,
+.character-option.active .option-inner {
+  transform: rotateY(180deg);
+}
+
+
+/* =================================
+   8. 卡牌選取與滑鼠效果
+================================= */
+
+.character-option.active {
+  border-color: var(--red2);
+  box-shadow: 0 0 20px #c04b5d66;
+}
+
+.character-option:hover {
+  border-color: var(--gold);
+  box-shadow: 0 10px 25px #0009;
+  transform: translateY(-5px);
+}
+
+.character-option:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+
+/* =================================
+   9. 平板版
+================================= */
+
+@media (max-width: 800px) {
+
+  .character-display {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 28px;
+  }
+
+  .character-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .character-info {
+    width: 100%;
+  }
+
+}
+
+
+/* =================================
+   10. 手機版
+================================= */
+
+@media (max-width: 480px) {
+
+  .selected-card {
+    width: 210px;
+  }
+
+  .character-display {
+    gap: 22px;
+  }
+
+  .character-options {
+    gap: 14px;
+  }
+
+  .character-info h2 {
+    font-size: 24px;
+  }
+
+}
