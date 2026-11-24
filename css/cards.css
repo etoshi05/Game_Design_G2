@@ -1,0 +1,483 @@
+
+/* =========================================
+   夜路・番婆｜角色圖鑑與卡牌動態展示廊
+   roles.css
+========================================= */
+
+/* =========================================
+   角色與卡牌圖鑑標題文字強制置中
+========================================= */
+
+/* 角色圖鑑 */
+.character-section .kicker,
+.character-section .section-title,
+.character-section p.lead {
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 卡牌圖鑑 */
+.card-gallery .card-gallery__intro .kicker,
+.card-gallery .card-gallery__intro .section-title,
+.card-gallery .card-gallery__intro p.lead {
+  display: block;
+  width: 100%;
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* =========================================
+   A. 角色圖鑑
+========================================= */
+
+/* 1. 上方角色展示區 */
+
+.character-display {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: center;
+  gap: 40px;
+
+  width: 100%;
+  max-width: 900px;
+  margin: 35px auto 45px;
+}
+
+
+/* 2. 上方大張角色卡 */
+
+.selected-card {
+  width: 260px;
+  aspect-ratio: 2 / 3;
+
+  margin: 0 auto;
+
+  background: #151216;
+  border: 3px solid var(--gold);
+  border-radius: 8px;
+
+  overflow: hidden;
+  box-shadow: 0 12px 35px #0009;
+
+  perspective: 1000px;
+  cursor: pointer;
+
+  transition: box-shadow .3s ease;
+}
+
+.selected-card:hover {
+  box-shadow: 0 15px 42px #c5a77a55;
+}
+
+.selected-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transition: transform .55s ease;
+}
+
+/* 上方大卡牌翻轉 */
+
+.selected-card.is-flipping img {
+  transform: rotateY(90deg);
+}
+
+/* 鍵盤操作提示 */
+
+.selected-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 5px;
+}
+
+
+/* 3. 角色介紹 */
+
+.character-info {
+  width: 100%;
+  min-width: 0;
+  position: static;
+
+  text-align: center;
+}
+
+.character-info h2 {
+  color: var(--cream);
+  margin: 12px 0 20px;
+}
+
+.character-info h3 {
+  color: #e8cbc5;
+  margin: 22px 0 10px;
+}
+
+.character-info p {
+  color: #c8bcb5;
+  line-height: 1.9;
+}
+
+.character-divider {
+  width: 55px;
+  height: 2px;
+  background: var(--gold);
+  margin: 18px auto;
+}
+
+.character-number {
+  margin-top: 24px;
+  color: var(--gold);
+  letter-spacing: .12em;
+}
+
+
+/* 4. 角色選擇區 */
+
+.character-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+
+/* 5. 角色卡牌外框 */
+
+.character-option {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  padding: 0;
+  border: 2px solid #49333b;
+
+  background: transparent;
+  cursor: pointer;
+
+  perspective: 1000px;
+  overflow: visible;
+  border-radius: 8px;
+
+  transition:
+    border-color .3s,
+    box-shadow .3s,
+    transform .3s;
+}
+
+
+/* 卡牌內層 */
+
+.option-inner {
+  display: block;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.2,.7,.3,1);
+}
+
+
+/* 6. 卡牌正反面 */
+
+.option-face {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+  border-radius: 6px;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.option-face img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+}
+
+/* 卡背 */
+
+.option-back {
+  transform: rotateY(0deg);
+}
+
+/* 卡牌正面 */
+
+.option-front {
+  transform: rotateY(180deg);
+}
+
+
+/* 7. 卡牌翻轉 */
+
+.character-option:hover .option-inner,
+.character-option:focus-visible .option-inner,
+.character-option.active .option-inner {
+  transform: rotateY(180deg);
+}
+
+
+/* 8. 卡牌選取與滑鼠效果 */
+
+.character-option.active {
+  border-color: var(--red2);
+  box-shadow: 0 0 20px #c04b5d66;
+}
+
+.character-option:hover {
+  border-color: var(--gold);
+  box-shadow: 0 10px 25px #0009;
+  transform: translateY(-5px);
+}
+
+.character-option:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+
+/* =========================================
+   B. 卡牌動態展示廊
+========================================= */
+
+/* 1. 展示廊主要區域 */
+
+.card-gallery {
+  padding: clamp(28px, 5vw, 64px) 0;
+  overflow: visible;
+}
+
+.card-gallery__intro {
+  text-align: center;
+  margin: 0 auto 28px;
+  padding: 0 20px;
+}
+
+.card-gallery__intro p {
+  opacity: 0.75;
+}
+
+
+/* 2. 卡牌展示列 */
+
+.card-gallery__row {
+  position: relative;
+  overflow: visible;
+  margin: 18px 0;
+  z-index: 1;
+}
+
+/* 上下排卡牌軌道 */
+
+.card-gallery__track {
+  display: flex;
+  width: max-content;
+  gap: 18px;
+
+  overflow: visible;
+
+  animation: card-marquee 70s linear infinite;
+}
+
+/* 下排反方向移動 */
+
+.card-gallery__row--reverse .card-gallery__track {
+  animation-direction: reverse;
+  animation-duration: 82s;
+}
+
+
+/* 3. 卡牌基本樣式 */
+
+.gallery-card {
+  display: block;
+
+  flex: 0 0 clamp(130px, 15vw, 210px);
+
+  position: relative;
+  z-index: 1;
+
+  overflow: hidden;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  filter: saturate(0.88);
+
+  transform: scale(1);
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+/* 卡牌圖片 */
+
+.gallery-card img {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  object-fit: cover;
+}
+
+
+/* 4. 滑鼠移入：放大卡牌 */
+
+.gallery-card:hover,
+.gallery-card:focus-visible {
+  transform: scale(1.5);
+
+  z-index: 9999;
+
+  filter: saturate(1.1) brightness(1.05);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.65);
+
+  outline: 2px solid var(--gold, #c9a45c);
+  outline-offset: 3px;
+}
+
+/* 放大時提升整排層級 */
+
+.card-gallery__row:has(.gallery-card:hover) {
+  z-index: 100;
+}
+
+/* 滑鼠移入時暫停移動 */
+
+.card-gallery__row:hover .card-gallery__track {
+  animation-play-state: paused;
+}
+
+
+/* 5. 卡牌移動動畫 */
+
+@keyframes card-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* 6. 展示廊提示文字 */
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 28px;
+
+  font-size: 0.9rem;
+  opacity: 0.65;
+}
+
+
+/* =========================================
+   C. 平板版 RWD
+========================================= */
+
+@media (max-width: 800px) {
+
+  .character-display {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 28px;
+  }
+
+  .character-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .character-info {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================
+   D. 手機版 RWD
+========================================= */
+
+@media (max-width: 480px) {
+
+  .selected-card {
+    width: 210px;
+  }
+
+  .character-display {
+    gap: 22px;
+  }
+
+  .character-options {
+    gap: 14px;
+  }
+
+  .character-info h2 {
+    font-size: 24px;
+  }
+
+}
+
+
+/* =========================================
+   E. 卡牌展示廊平板與手機版
+========================================= */
+
+@media (max-width: 768px) {
+
+  .card-gallery__track {
+    gap: 12px;
+  }
+
+  .gallery-card {
+    flex-basis: 130px;
+  }
+
+  .gallery-card:hover,
+  .gallery-card:focus-visible {
+    transform: scale(1.25);
+  }
+
+}
+
+
+/* =========================================
+   F. 減少動態效果設定
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card-gallery__track {
+    animation: none;
+  }
+
+  .gallery-card {
+    transition: none;
+  }
+
+}
