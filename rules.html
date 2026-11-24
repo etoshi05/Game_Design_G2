@@ -5,6 +5,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 網站分頁 Logo -->
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
   <title>遊戲介紹｜夜路・番婆</title>
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/rules.css">
@@ -43,9 +45,10 @@
     </div>
   </section>
 
+    
   <main>
 
-    <!-- 遊戲基本資訊與勝利條件 -->
+    <!-- 01 遊戲基本資訊 -->
     <section>
       <div class="wrap fade-in">
 
@@ -77,163 +80,212 @@
 
         <div class="grid">
           <article class="card">
-            <h3>條件一</h3>
-            <p>確認至少 2 條已驗證有效規則。</p>
+            <h3>條件一｜驗證規則</h3>
+            <p>至少驗證出 2 條真實規則，條件規則須符合成立條件並完成驗證。</p>
           </article>
 
           <article class="card">
-            <h3>條件二</h3>
-            <p>蒐集 2 張指定逃生路線線索。</p>
+            <h3>條件二｜蒐集線索</h3>
+            <p>取得指定的 2 張必要逃生線索，拼湊完整逃生路線。</p>
           </article>
 
           <article class="card">
-            <h3>條件三</h3>
-            <p>取得出口通行信物，並執行正式逃離行動。</p>
+            <h3>條件三｜正式逃離</h3>
+            <p>取得通關信物，並由位於村口的玩家花費一次主要行動執行逃生。</p>
           </article>
         </div>
 
       </div>
     </section>
 
-    <!-- 遊戲開始前設置 -->
+
+    <!-- 02 遊戲開始與準備 -->
     <section>
       <div class="wrap fade-in">
-        <h2 class="section-title">遊戲開始前設置</h2>
+
+        <h2 class="section-title">遊戲開始與準備</h2>
 
         <div class="rule-list">
 
           <div class="rule">
-            <strong>1｜分配角色</strong>
-            <span>
-              分配守夜人、記錄者、引路人、同行者。
-            </span>
+            <strong>1｜配置遊戲地圖</strong>
+            <span>將四個探索地點及相關版圖放置於桌面中央。</span>
           </div>
 
           <div class="rule">
-            <strong>2｜放置規則卡</strong>
-            <span>
-              玩家可閱讀規則文字，但不能查看隱藏答案。
-            </span>
+            <strong>2｜分配角色</strong>
+            <span>每位玩家隨機抽取一張角色卡。</span>
           </div>
 
           <div class="rule">
-            <strong>3｜整理線索</strong>
-            <span>
-              分開規則證據與逃生線索，依地點整理。
-            </span>
+            <strong>3｜設定精神值</strong>
+            <span>每位玩家的精神值初始設定為 4 點。</span>
           </div>
 
           <div class="rule">
-            <strong>4｜準備配件</strong>
-            <span>
-              準備道具卡、事件卡與出口通行信物。
-            </span>
+            <strong>4｜放置規則卡</strong>
+            <span>將 10 張規則卡放置於規則區，公開規則文字，隱藏真假答案。</span>
           </div>
 
           <div class="rule">
-            <strong>5｜主持人準備</strong>
-            <span>
-              主持人將規則答案標記放在玩家看不到的位置。
-            </span>
+            <strong>5｜主持人設定</strong>
+            <span>依情境設定真偽規則、逃生線索、傳說線索及其指定地點。</span>
           </div>
 
           <div class="rule">
-            <strong>6｜設定狀態</strong>
-            <span>
-              每位玩家精神值設為 4，
-              夜晚進度放在第 1 回合。
-            </span>
+            <strong>6｜準備事件卡</strong>
+            <span>將事件卡洗勻後放置於事件區。</span>
+          </div>
+
+          <div class="rule">
+            <strong>7｜準備心理干擾卡</strong>
+            <span>將心理干擾卡洗勻後放置於心理干擾區。</span>
+          </div>
+
+          <div class="rule">
+            <strong>8｜設定回合標記</strong>
+            <span>將回合標記設定為第 1 回合。</span>
           </div>
 
         </div>
+
+        <p class="lead">
+          遊戲開始前，主持人須完成規則真偽、隱藏條件、
+          對應線索及答案設定，體驗前不得查看。
+        </p>
+
       </div>
     </section>
 
-    <!-- 每回合遊戲流程 -->
+
+    <!-- 03 每回合遊戲流程 -->
     <section>
       <div class="wrap fade-in">
+
         <h2 class="section-title">每回合遊戲流程</h2>
 
-        <div class="grid">
+        <p class="lead">
+          最多進行 6 個回合，每回合分為五個階段。
+        </p>
 
-          <article class="card">
-            <h3>1｜翻開事件卡</h3>
-            <p>揭示本回合事件。</p>
-          </article>
+        <div class="rule-list">
 
-          <article class="card">
-            <h3>2｜討論推理</h3>
-            <p>分享線索、猜測規則、分配探索方向。</p>
-          </article>
+          <div class="rule">
+            <strong>第一階段｜事件提示</strong>
+            <span>翻開一張事件卡並立即執行，效果持續至本回合結束。</span>
+          </div>
 
-          <article class="card">
-            <h3>3｜選擇行動</h3>
-            <p>每位玩家選擇一項行動。</p>
-          </article>
+          <div class="rule">
+            <strong>第二階段｜團隊討論</strong>
+            <span>玩家自由交換資訊、已驗證規則、精神值與目標地點，討論行動計畫，不消耗主要行動。</span>
+          </div>
 
-          <article class="card">
-            <h3>4｜結算效果</h3>
-            <p>結算卡牌效果與精神值。</p>
-          </article>
+          <div class="rule">
+            <strong>第三階段｜玩家行動</strong>
+            <span>每位玩家執行一項主要行動，可選擇探索、驗證規則、休息或執行逃生。</span>
+          </div>
 
-          <article class="card">
-            <h3>5｜夜晚前進</h3>
-            <p>
-              回合進度前進一格；
-              第 6 回合結束仍未達標即失敗。
-            </p>
-          </article>
+          <div class="rule">
+            <strong>第四階段｜效果結算</strong>
+            <span>
+              依序結算：事件卡效果、規則卡效果、道具與角色能力、
+              心理干擾卡效果、精神值變化，最後確認是否符合逃生條件。
+            </span>
+          </div>
+
+          <div class="rule">
+            <strong>第五階段｜回合結束</strong>
+            <span>尚未逃生則回合標記前進一格；第六回合結束仍未逃生則全隊失敗。</span>
+          </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- 四種基本行動 -->
+
+    <!-- 04 四種主要行動 -->
     <section>
       <div class="wrap fade-in">
-        <h2 class="section-title">四種基本行動</h2>
+
+        <h2 class="section-title">四種主要行動</h2>
 
         <div class="grid">
 
           <article class="card">
             <h3>探索</h3>
-            <p>
-              前往可探索地點，依地點取得線索或道具。
-              老屋偏向規則證據；山徑偏向逃生線索。
-            </p>
+            <p>前往一個地點，取得一張尚未取得的線索或道具。</p>
           </article>
 
           <article class="card">
             <h3>驗證規則</h3>
-            <p>
-              使用與規則相關的證據，
-              確認規則有效或無效。
-              證據只能用於卡面指定的規則。
-            </p>
+            <p>持有規則相關證據，調查指定規則的隱藏答案。每回合限一次。</p>
           </article>
 
           <article class="card">
             <h3>休息</h3>
-            <p>
-              恢復 1 點精神值；
-              每回合最多透過休息恢復一次，
-              精神值上限為 4。
-            </p>
+            <p>恢復 1 點精神值，精神值上限為 4 點。</p>
           </article>
 
           <article class="card">
-            <h3>前往出口／逃離</h3>
-            <p>
-              條件齊備後才能正式逃離；
-              條件不足時不可宣告成功。
-            </p>
+            <h3>執行逃生</h3>
+            <p>逃生條件齊備時，由位於村口的玩家執行逃生；成功後全隊立即離開。</p>
           </article>
 
         </div>
+
+      </div>
+    </section>
+
+
+    <!-- 05 遊戲結局 -->
+    <section>
+      <div class="wrap fade-in">
+
+        <h2 class="section-title">遊戲結局</h2>
+
+        <div class="grid">
+
+          <article class="card">
+            <h3>結局 A｜成功逃生</h3>
+            <p>第六回合結束前完成所有逃生條件，成功離開村落。</p>
+          </article>
+
+          <article class="card">
+            <h3>結局 B｜隱藏真相</h3>
+            <p>成功逃生同時取得兩張傳說線索，解鎖隱藏結局，揭開村落祕密。</p>
+          </article>
+
+          <article class="card">
+            <h3>結局 C｜迷失夜路</h3>
+            <p>第六回合結束仍未完成逃生條件，全隊判定失敗。</p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 06 遊戲核心概念 -->
+    <section>
+      <div class="wrap fade-in">
+
+        <h2 class="section-title">遊戲核心概念</h2>
+
+        <article class="card">
+          <p>
+            《夜路・番婆》重視合作、資訊判斷與資源分配。
+            玩家須在有限回合內辨識真假規則、蒐集線索、
+            應對心理干擾與時間壓力，共同找出正確逃生之路。
+          </p>
+        </article>
+
       </div>
     </section>
 
   </main>
+
 
   <!-- 頁尾 -->
   <footer class="footer">

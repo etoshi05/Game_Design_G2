@@ -1,0 +1,651 @@
+
+/* =========================================
+   夜路・番婆｜遊戲介紹頁面完整特效
+   rules.css
+========================================= */
+
+
+/* =========================================
+   1. 頁面背景與迷霧
+========================================= */
+
+body {
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+/* 背景光影 */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 30%,
+      rgba(139, 91, 55, 0.10),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(120, 75, 85, 0.09),
+      transparent 38%
+    );
+
+  animation: atmosphere 12s ease-in-out infinite alternate;
+}
+
+/* 動態迷霧 */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 45%,
+      rgba(190, 190, 180, 0.12),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 75% 55%,
+      rgba(150, 155, 160, 0.11),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 50% 85%,
+      rgba(180, 165, 145, 0.09),
+      transparent 38%
+    );
+
+  filter: blur(55px);
+  opacity: 0.85;
+
+  animation: fog-drift 24s ease-in-out infinite alternate;
+}
+
+
+/* =========================================
+   2. 背景動畫
+========================================= */
+
+/* 背景光影變化 */
+
+@keyframes atmosphere {
+  from {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* 迷霧緩慢飄動 */
+
+@keyframes fog-drift {
+  0% {
+    transform: translate(-4%, 2%) scale(1);
+  }
+
+  50% {
+    transform: translate(3%, -2%) scale(1.08);
+  }
+
+  100% {
+    transform: translate(-2%, 3%) scale(1.03);
+  }
+}
+
+
+/* =========================================
+   3. 標題金色光影
+========================================= */
+
+.section-title {
+  position: relative;
+
+  text-shadow:
+    0 0 8px rgba(201, 164, 92, 0.15);
+
+  transition:
+    text-shadow 0.4s ease,
+    color 0.4s ease;
+}
+
+.section-title:hover {
+  text-shadow:
+    0 0 8px rgba(201, 164, 92, 0.5),
+    0 0 20px rgba(201, 164, 92, 0.25);
+}
+
+
+/* =========================================
+   4. 資訊卡片懸浮效果
+========================================= */
+
+.stat,
+.card {
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* 滑鼠移入卡片 */
+
+.stat:hover,
+.card:hover {
+  transform: translateY(-8px);
+
+  border-color: var(--gold);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(201, 164, 92, 0.15);
+}
+
+
+/* =========================================
+   5. 卡片金色掃光效果
+========================================= */
+
+.stat::before,
+.card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 60%;
+  height: 100%;
+
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 226, 170, 0.10),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.7s ease;
+
+  pointer-events: none;
+}
+
+/* 滑鼠移入時掃過 */
+
+.stat:hover::before,
+.card:hover::before {
+  left: 150%;
+}
+
+
+/* =========================================
+   6. 規則列表互動效果
+========================================= */
+
+.rule {
+  position: relative;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* 滑鼠移入 */
+
+.rule:hover {
+  transform: translateX(8px);
+
+  background: rgba(201, 164, 92, 0.07);
+
+  border-color: var(--gold);
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* 規則標題 */
+
+.rule strong {
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+/* 標題金色發光 */
+
+.rule:hover strong {
+  color: var(--gold);
+
+  text-shadow:
+    0 0 10px rgba(201, 164, 92, 0.35);
+}
+
+
+/* =========================================
+   7. 頁面區塊進場動畫
+========================================= */
+
+.fade-in {
+  opacity: 0;
+
+  transform: translateY(30px);
+
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(.2,.7,.3,1);
+}
+
+/* 顯示時 */
+
+.fade-in.visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   8. 區塊分隔線裝飾
+========================================= */
+
+section {
+  position: relative;
+}
+
+/* 每個區塊上方的金色分隔線 */
+
+section + section::before {
+  content: "";
+
+  display: block;
+
+  width: min(180px, 35%);
+  height: 1px;
+
+  margin: 0 auto 35px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+  );
+
+  opacity: 0.45;
+}
+
+
+/* =========================================
+   9. 資訊數字互動效果
+========================================= */
+
+.stat b {
+  display: inline-block;
+
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease,
+    text-shadow 0.35s ease;
+}
+
+/* 滑鼠移入數字 */
+
+.stat:hover b {
+  transform: scale(1.08);
+
+  color: var(--gold);
+
+  text-shadow:
+    0 0 12px rgba(201, 164, 92, 0.35);
+}
+
+
+/* =========================================
+   10. 卡片邊框發光
+========================================= */
+
+.card:hover {
+  outline: 1px solid rgba(201, 164, 92, 0.18);
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================
+   11. 手機版特效調整
+========================================= */
+
+@media (max-width: 768px) {
+
+  /* 手機版減少卡片移動距離 */
+
+  .stat:hover,
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  .rule:hover {
+    transform: translateX(3px);
+  }
+
+}
+
+
+/* =========================================
+   12. 減少動態效果
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+
+}
+
+/* =========================================
+   夜路・番婆｜遊戲介紹頁面 RWD
+========================================= */
+
+
+/* =========================================
+   A. 平板版 768px ～ 1024px
+========================================= */
+
+@media (max-width: 1024px) {
+
+  /* 主要內容寬度 */
+  .wrap {
+    width: 90%;
+    max-width: 900px;
+  }
+
+  /* 遊戲資訊 */
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  /* 勝利條件、流程、行動卡片 */
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  /* 標題 */
+  .page-hero h1 {
+    font-size: clamp(32px, 5vw, 46px);
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  /* 規則列表 */
+  .rule {
+    padding: 20px;
+  }
+
+}
+
+
+/* =========================================
+   B. 手機版 481px ～ 767px
+========================================= */
+
+@media (max-width: 767px) {
+
+  /* 頁面標題 */
+  .page-hero {
+    padding: 65px 0 45px;
+    text-align: center;
+  }
+
+  .page-hero h1 {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  .page-hero p {
+    font-size: 14px;
+    line-height: 1.9;
+    padding: 0 10px;
+  }
+
+  /* 主要內容 */
+  .wrap {
+    width: 90%;
+  }
+
+  /* 遊戲資訊改成兩欄 */
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 20px 10px;
+    text-align: center;
+  }
+
+  .stat b {
+    font-size: 20px;
+  }
+
+  .stat small {
+    font-size: 12px;
+  }
+
+  /* 所有一般卡片改成單欄 */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  /* 區塊標題 */
+  .section-title {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  /* 規則列表 */
+  .rule-list {
+    gap: 12px;
+  }
+
+  .rule {
+    padding: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .rule strong {
+    font-size: 15px;
+  }
+
+  .rule span {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* 區塊間距 */
+  section {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  /* 迷霧效果降低，避免手機負擔 */
+  body::after {
+    filter: blur(40px);
+    opacity: 0.55;
+  }
+
+  /* 卡片懸浮幅度 */
+  .stat:hover,
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  .rule:hover {
+    transform: translateX(3px);
+  }
+
+}
+
+
+/* =========================================
+   C. 小型手機版 480px 以下
+========================================= */
+
+@media (max-width: 480px) {
+
+  /* 頁面標題 */
+  .page-hero {
+    padding: 55px 0 35px;
+  }
+
+  .page-hero h1 {
+    font-size: 27px;
+  }
+
+  .page-hero p {
+    font-size: 13px;
+  }
+
+  /* 遊戲資訊 */
+  .stats {
+    gap: 10px;
+  }
+
+  .stat {
+    padding: 17px 8px;
+  }
+
+  .stat b {
+    font-size: 18px;
+  }
+
+  .stat small {
+    font-size: 11px;
+  }
+
+  /* 區塊標題 */
+  .section-title {
+    font-size: 22px;
+    margin-top: 30px;
+  }
+
+  /* 卡片 */
+  .card {
+    padding: 18px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  /* 規則列表 */
+  .rule {
+    padding: 16px;
+  }
+
+  .rule strong {
+    font-size: 14px;
+  }
+
+  .rule span {
+    font-size: 13px;
+  }
+
+  /* 頁尾 */
+  .footer {
+    font-size: 11px;
+    line-height: 1.9;
+    text-align: center;
+  }
+
+}
+
+
+/* =========================================
+   D. 超小型手機版 360px 以下
+========================================= */
+
+@media (max-width: 360px) {
+
+  .wrap {
+    width: 92%;
+  }
+
+  .page-hero h1 {
+    font-size: 24px;
+  }
+
+  .stat b {
+    font-size: 16px;
+  }
+
+  .stat small {
+    font-size: 10px;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+}

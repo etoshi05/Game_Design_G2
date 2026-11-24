@@ -5,10 +5,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>線上遊戲｜夜路・番婆</title>
+
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <title>主持人操作台｜夜路・番婆</title>
+
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/play.css">
+</head>
+
 <body>
+
   <!-- 導覽列 -->
   <header class="topbar">
     <div class="wrap nav">
@@ -24,7 +30,7 @@
         <a href="rules.html">遊戲介紹</a>
         <a href="cards.html">卡牌圖鑑</a>
         <a href="map.html">村落地圖</a>
-        <a href="play.html">線上遊戲</a>
+        <a href="play.html">主持人操作台</a>
       </nav>
     </div>
   </header>
@@ -32,135 +38,353 @@
   <!-- 頁面標題 -->
   <section class="page-hero">
     <div class="wrap">
-      <div class="kicker">06 / PLAY THE NIGHT</div>
-      <h1>線上遊戲體驗</h1>
+      <div class="kicker">06 / GAME MASTER</div>
+      <h1>主持人操作台</h1>
       <p>
-        在六回合內探索、驗證規則、恢復精神值，
-        並取得逃離所需條件。
+        掌控每一個夜晚，引導玩家探索村落，
+        在六回合內揭開隱藏的真相。
       </p>
     </div>
   </section>
 
   <main>
-    <section>
-      <div class="wrap fade-in" data-game>
+    <div class="wrap play-container">
 
-        <!-- 遊戲說明 -->
-        <p class="lead">
-          此區為依照桌遊目標製作的簡化互動示範。
-          正式遊戲的規則真偽、線索對應、卡牌效果與地點開放，
-          仍須依實體卡牌及主持人事先設定的隱藏答案裁定；
-          示範操作不代表正式牌組抽取結果。
-        </p>
+      <!-- 遊戲狀態 -->
+      <div class="dashboard-header">
+        <div>
+          <div class="eyebrow">NIGHT ROAD SYSTEM</div>
+          <h2 id="mainStatus">等待遊戲開始</h2>
+        </div>
 
-        <!-- 遊戲主畫面 -->
-        <div class="game-shell">
+        <div class="round-indicator">
+          <span id="roundNumber">0</span>
+          <small>/ 6 回合</small>
+        </div>
+      </div>
 
-          <!-- 回合資訊 -->
-          <div class="game-head">
+      <!-- =================================
+           第一區：遊戲準備
+      ================================== -->
+      <section class="host-panel" id="setupPanel">
+
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">GAME SETUP</div>
+            <h2>01. 遊戲準備</h2>
+          </div>
+          <span class="panel-tag">開始前設定</span>
+        </div>
+
+        <div class="setup-row">
+          <div class="setup-field">
+            <label for="playerCount">遊玩人數</label>
+            <select id="playerCount">
+              <option value="4">4 位玩家</option>
+              <option value="5">5 位玩家</option>
+              <option value="6">6 位玩家</option>
+            </select>
+          </div>
+
+          <div class="setup-field">
+            <label>遊戲資訊</label>
+            <div class="setup-info">
+              <span>遊戲時間：40～60 分鐘</span>
+              <span>遊戲回合：6 回合</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 角色分配 -->
+        <div class="sub-heading">
+          <h3>玩家角色分配</h3>
+          <p>4 人遊玩時自動分配四種角色；5～6 人請由主持人確認角色。</p>
+        </div>
+
+        <div class="player-setup-grid" id="playerSetupGrid">
+          <!-- JS 產生玩家 -->
+        </div>
+
+        <!-- 規則卡 -->
+        <div class="sub-heading">
+          <h3>本局隱藏規則</h3>
+          <p>系統會在開始遊戲時隨機分配，結果僅供主持人查看。</p>
+        </div>
+
+        <div class="rule-count-grid">
+          <div class="rule-count-card true-count">
+            <span>真規則</span>
+            <strong>4</strong>
+            <small>張</small>
+          </div>
+
+          <div class="rule-count-card false-count">
+            <span>假規則</span>
+            <strong>3</strong>
+            <small>張</small>
+          </div>
+
+          <div class="rule-count-card conditional-count">
+            <span>條件規則</span>
+            <strong>3</strong>
+            <small>張</small>
+          </div>
+        </div>
+
+        <div class="setup-actions">
+          <button class="primary-btn" id="startGame">
+            開始遊戲
+          </button>
+        </div>
+
+      </section>
+
+      <!-- =================================
+           第二區：本局規則
+      ================================== -->
+      <section class="host-panel" id="rulesPanel" hidden>
+
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">HIDDEN RULES</div>
+            <h2>02. 本局隱藏規則</h2>
+          </div>
+          <span class="panel-tag">主持人專用</span>
+        </div>
+
+        <div class="rule-count-grid" id="ruleSummary">
+          <!-- JS 產生統計 -->
+        </div>
+
+        <div class="rule-list" id="ruleList">
+          <!-- JS 產生規則 -->
+        </div>
+
+      </section>
+
+      <!-- =================================
+           第三區：玩家狀態
+      ================================== -->
+      <section class="host-panel" id="playersPanel" hidden>
+
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">PLAYER STATUS</div>
+            <h2>03. 玩家狀態</h2>
+          </div>
+          <span class="panel-tag">即時紀錄</span>
+        </div>
+
+        <div class="player-grid" id="playerGrid">
+          <!-- JS 產生玩家資料 -->
+        </div>
+
+      </section>
+
+      <!-- =================================
+           第四區：回合操作
+      ================================== -->
+      <section class="host-panel" id="roundPanel" hidden>
+
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">ROUND CONTROL</div>
+            <h2>04. 回合操作</h2>
+          </div>
+          <span class="round-badge" id="currentRoundBadge">
+            第 1 回合
+          </span>
+        </div>
+
+        <!-- 回合階段 -->
+        <div class="phase-list" id="phaseList">
+          <div class="phase-item active" data-phase="event">
+            <span>01</span>
             <div>
-              <div class="eyebrow">NIGHT PROGRESS</div>
-              <div class="round" id="roundLabel">
-                第 1 / 6 回合
+              <b>事件階段</b>
+              <small>抽取事件卡、宣讀事件</small>
+            </div>
+          </div>
+
+          <div class="phase-item" data-phase="discussion">
+            <span>02</span>
+            <div>
+              <b>討論階段</b>
+              <small>玩家討論與分配行動</small>
+            </div>
+          </div>
+
+          <div class="phase-item" data-phase="action">
+            <span>03</span>
+            <div>
+              <b>行動階段</b>
+              <small>玩家依序選擇行動</small>
+            </div>
+          </div>
+
+          <div class="phase-item" data-phase="settlement">
+            <span>04</span>
+            <div>
+              <b>結算階段</b>
+              <small>確認卡牌效果與精神值</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- 階段內容 -->
+        <div class="phase-content">
+
+          <div class="event-display" id="eventDisplay">
+            <div class="eyebrow">TONIGHT'S EVENT</div>
+            <h3 id="eventTitle">等待事件抽取</h3>
+            <p id="eventDescription">
+              開始回合後，系統將顯示本回合的事件內容。
+            </p>
+          </div>
+
+          <div class="host-hint" id="hostHint">
+            <strong>主持人提示</strong>
+            <p id="hostHintText">
+              請抽取事件卡，並向玩家宣讀事件內容。
+            </p>
+          </div>
+
+          <!-- 玩家行動 -->
+          <div class="action-area" id="actionArea" hidden>
+
+            <h3>玩家行動管理</h3>
+
+            <div class="action-player-select">
+              <label for="activePlayer">選擇目前玩家</label>
+              <select id="activePlayer"></select>
+            </div>
+
+            <div class="action-buttons">
+              <button class="game-action" data-action="explore">
+                <span>⌕</span>
+                探索
+              </button>
+
+              <button class="game-action" data-action="verify">
+                <span>◇</span>
+                驗證規則
+              </button>
+
+              <button class="game-action" data-action="rest">
+                <span>♡</span>
+                休息
+              </button>
+
+              <button class="game-action" data-action="escape">
+                <span>↗</span>
+                前往出口
+              </button>
+            </div>
+
+            <div class="action-result" id="actionResult">
+              請選擇玩家及行動。
+            </div>
+
+            <!-- 探索卡牌選擇 -->
+            <div id="exploreCardPicker"></div>
+            <div id="exploreCardResult"></div>
+
+            <!-- 規則驗證 -->
+            <div id="verifyCardPicker"></div>
+            <!-- =================================
+                玩家道具背包
+            ================================== -->
+            <div class="inventory-area" id="inventoryArea">
+
+              <div class="sub-heading">
+                <h3>玩家道具背包</h3>
+                <p>查看目前玩家持有的道具，並執行道具效果。</p>
               </div>
-            </div>
 
-            <button class="reset" id="reset">
-              重新開始
-            </button>
-          </div>
-
-          <!-- 遊戲數值 -->
-          <div class="meters">
-
-            <div class="meter">
-              <small>精神值</small>
-              <b id="sanity">4 / 4</b>
-
-              <div class="bar">
-                <i id="sanityBar"></i>
+              <!-- 道具列表 -->
+              <div class="inventory-grid" id="inventoryGrid">
+                <p class="inventory-empty">
+                  請先選擇玩家。
+                </p>
               </div>
-            </div>
 
-            <div class="meter">
-              <small>已驗證有效規則</small>
-              <b id="rules">0 / 2</b>
-            </div>
+              <!-- 道具詳細資訊 -->
+              <div class="inventory-detail" id="inventoryDetail" hidden>
+                <h4 id="inventoryItemName">道具名稱</h4>
 
-            <div class="meter">
-              <small>逃生線索</small>
-              <b id="clues">0 / 2</b>
-            </div>
+                <p id="inventoryItemDescription">
+                  道具效果說明
+                </p>
 
-            <div class="meter">
-              <small>出口信物</small>
-              <b id="token">未取得</b>
-            </div>
+                <div class="inventory-use-options" id="inventoryUseOptions">
+                  <!-- JS 產生使用條件 -->
+                </div>
 
+                <button
+                  type="button"
+                  class="primary-btn"
+                  id="useItemButton"
+                  disabled
+                >
+                  使用道具
+                </button>
+              </div>
+
+            </div>
           </div>
 
-          <!-- 事件區 -->
-          <div class="event">
-            <small>TONIGHT'S OMEN</small>
-
-            <h3 id="eventTitle">
-              門外的三次敲門
-            </h3>
-
-            <p id="eventText">
-              夜深了，老屋外突然傳來三次敲門聲。
-              你要調查門外，還是先確認規則？
-            </p>
-          </div>
-
-          <!-- 行動選擇 -->
-          <h3 style="font-size: 16px; margin: 20px 0 10px">
-            選擇本回合行動
-          </h3>
-
-          <div class="game-actions">
-            <button class="action" data-action="explore">
-              探索
+          <!-- 階段控制 -->
+          <div class="phase-controls">
+            <button class="secondary-btn" id="previousPhase" disabled>
+              上一階段
             </button>
 
-            <button class="action" data-action="verify">
-              驗證規則
+            <button class="primary-btn" id="nextPhase">
+              下一階段
             </button>
-
-            <button class="action" data-action="rest">
-              休息
-            </button>
-
-            <button class="action" data-action="escape">
-              前往出口
-            </button>
-          </div>
-
-          <!-- 遊戲提醒 -->
-          <p class="notice">
-            每回合選擇一項行動。
-            第六回合結束時，若未完成所有條件，全隊逃離失敗。
-          </p>
-
-          <!-- 遊戲紀錄 -->
-          <h3 style="font-size: 15px; margin: 22px 0 8px">
-            夜路紀錄
-          </h3>
-
-          <div class="log" id="log">
-            <p>
-              — 你們踏入迷霧聚落。夜晚開始了。
-            </p>
-
-            <p>
-              — 勝利需要：2 條有效規則、2 張逃生線索、
-              出口信物，以及正式逃離行動。
-            </p>
           </div>
 
         </div>
+
+        <!-- 回合切換 -->
+        <div class="round-controls">
+          <button class="secondary-btn" id="previousRound" disabled>
+            上一回合
+          </button>
+
+          <button class="primary-btn" id="nextRound">
+            結束本回合
+          </button>
+        </div>
+
+      </section>
+
+      <!-- =================================
+           第五區：遊戲紀錄
+      ================================== -->
+      <section class="host-panel" id="logPanel" hidden>
+
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">GAME RECORD</div>
+            <h2>05. 遊戲紀錄</h2>
+          </div>
+        </div>
+
+        <div class="game-log" id="gameLog">
+          <p>— 尚無遊戲紀錄。</p>
+        </div>
+
+      </section>
+
+      <!-- 重新開始 -->
+      <div class="bottom-controls" id="bottomControls" hidden>
+        <button class="reset-btn" id="resetGame">
+          重新開始遊戲
+        </button>
       </div>
-    </section>
+
+    </div>
   </main>
 
   <!-- 頁尾 -->
@@ -172,9 +396,11 @@
       僅供課程展示、學習與非商業遊玩使用。© 2026 設計團隊。
     </div>
   </footer>
-
-    <script src="js/common.js"></script>
+  <script src="js/game/game-data.js"></script>
+  <script src="js/game/game-state.js"></script>
+  <script src="js/game/game-history.js"></script>
+  <script src="js/game/game-card-selector.js"></script>
+  <script src="js/game/game-card-effects.js"></script>
   <script src="js/play.js"></script>
 </body>
-
 </html>
