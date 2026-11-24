@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const role = selects[i].value;
 
       if (!role) {
-        alert(`請先選擇玩家 ${i + 1} 的角色。`);
+        showInlineMessage(`請先選擇玩家 ${i + 1} 的角色。`);
         return null;
       }
 
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ruleResult = EFFECTS.initializeRules();
 
     if (!ruleResult.success) {
-        alert(ruleResult.message);
+        showInlineMessage(ruleResult.message);
         return;
     }
 
@@ -687,7 +687,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = SELECTOR.getCard(select.value);
 
       if (!card) {
-        alert("請先選擇卡牌。");
+        showInlineMessage("請先選擇卡牌。");
         return;
       }
 
@@ -734,7 +734,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!gameData) return;
 
     if (gameData.usedEvents.includes(card.id)) {
-      alert("這張事件卡本局已經使用過，請選擇其他卡牌。");
+      showInlineMessage("這張事件卡本局已經使用過，請選擇其他卡牌。");
       return;
     }
 
@@ -870,7 +870,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = SELECTOR.getCard(cardSelect.value);
 
       if (!card) {
-        alert("請選擇實際抽到的卡牌。");
+        showInlineMessage("請選擇實際抽到的卡牌。");
         return;
       }
 
@@ -901,7 +901,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentExplorationLocation = place;
       // 確認卡牌類型
       if (!["線索卡", "道具卡"].includes(card.category)) {
-          alert("這不是可用於探索的卡牌。");
+          showInlineMessage("這不是可用於探索的卡牌。");
           return;
       }
 
@@ -911,7 +911,7 @@ document.addEventListener("DOMContentLoaded", () => {
           : gameData.usedItems;
 
       if (usedList.includes(card.id)) {
-          alert("這張卡牌本局已經使用過，請選擇其他卡牌。");
+          showInlineMessage("這張卡牌本局已經使用過，請選擇其他卡牌。");
           return;
       }
 
@@ -919,7 +919,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 確認卡牌效果是否已建檔
       if (!card.confirmed) {
-          alert(
+          showInlineMessage(
               "這張卡牌的效果尚未建檔，暫時無法自動執行。\n\n" +
               "請先完成 game-data.js 的卡牌效果設定。"
           );
@@ -939,7 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 效果執行失敗，不記錄本次探索
       if (!effectResult.success) {
-          alert(effectResult.message);
+          showInlineMessage(effectResult.message);
           return;
       }
       // 判定 EVENT-03「燈光熄滅」效果
@@ -950,7 +950,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // EVENT-03 效果執行失敗
       if (!eventResult.success) {
-          alert(eventResult.message);
+          showInlineMessage(eventResult.message);
           return;
       }
 
@@ -960,7 +960,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const currentPlayer = STATE.getPlayer(player.id);
 
       if (!currentPlayer) {
-          alert("找不到玩家資料。");
+          showInlineMessage("找不到玩家資料。");
           return;
       }
 
@@ -1093,7 +1093,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const card = SELECTOR.getCard(select.value);
 
           if (!card) {
-              alert("請先選擇規則卡。");
+              showInlineMessage("請先選擇規則卡。");
               return;
           }
 
@@ -1110,12 +1110,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   el.actionResult.textContent =
                       verification.message;
 
-                  alert(verification.message);
+                  showInlineMessage(verification.message);
 
                   return;
               }
 
-              alert(verification.message);
+              showInlineMessage(verification.message);
               return;
           }
 
@@ -1169,7 +1169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!gameData || processing) return;
 
     if (gameData.currentPhase !== "action") {
-      alert("目前不是玩家行動階段。");
+      showInlineMessage("目前不是玩家行動階段。");
       return;
     }
 
@@ -1178,7 +1178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!player) return;
 
     if (playerHasActed(player)) {
-      alert(`${player.name} 本回合已完成行動。`);
+      showInlineMessage(`${player.name} 本回合已完成行動。`);
       selectNextPlayer();
       return;
     }
@@ -1331,7 +1331,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!hasToken) missing.push("出口通行信物");
 
     if (missing.length > 0) {
-      alert(
+      showInlineMessage(
         `目前尚未符合逃離條件：\n\n${missing.map(item => "・" + item).join("\n")}`
       );
       return;
@@ -1421,7 +1421,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateHostHint(message) {
     el.hostHintText.textContent = message;
   }
+  // 頁面內錯誤提示，不使用 alert 視窗
+  function showInlineMessage(message) {
+      el.mainStatus.textContent = message;
+      el.mainStatus.style.color = "#e05252";
 
+      if (el.hostHintText) {
+          el.hostHintText.textContent = message;
+          el.hostHintText.style.color = "#e05252";
+      }
+
+      if (el.actionResult && !el.actionArea.hidden) {
+          el.actionResult.textContent = message;
+          el.actionResult.style.color = "#e05252";
+      }
+  }
 
   /* ==========================================
      階段顯示
@@ -1565,7 +1579,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function changePhase(direction) {
     if (!gameData || pendingAction) {
       if (pendingAction) {
-        alert("請先完成目前玩家的卡牌選擇及確認。");
+        showInlineMessage("請先完成目前玩家的卡牌選擇及確認。");
       }
       return;
     }
@@ -1580,7 +1594,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (direction > 0 && gameData.currentPhase === "event") {
       if (!gameData.currentEvent) {
-        alert("請先選擇本回合實際抽到的事件卡。");
+        showInlineMessage("請先選擇本回合實際抽到的事件卡。");
         return;
       }
     }
@@ -1633,7 +1647,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (gameData.currentPhase !== "settlement") {
-      alert("請先完成本回合的事件、討論、玩家行動及結算。");
+      showInlineMessage("請先完成本回合的事件、討論、玩家行動及結算。");
       return;
     }
     const unfinishedPlayers = gameData.players.filter(
@@ -1721,14 +1735,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!token) missing.push("出口通行信物");
 
     if (missing.length) {
-      alert(
+      showInlineMessage(
         "第六回合已結束，目前尚未達成逃離條件：\n\n" +
         missing.map(item => "・" + item).join("\n")
       );
       return;
     }
 
-    alert(
+    showInlineMessage(
       "目前已符合基本逃離條件！\n\n請主持人確認正式逃離行動及是否達成額外傳說線索條件。"
     );
   }
@@ -1744,7 +1758,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const result = HISTORY.undo();
 
     if (!result.success) {
-      alert(result.message);
+      showInlineMessage(result.message);
       return;
     }
 
@@ -1802,8 +1816,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderInventory();
       renderPhase();
       renderLogs();
-
-      el.mainStatus.textContent = "遊戲進行中";
   }
 
 
