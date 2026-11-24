@@ -1,18 +1,566 @@
-/* 分類搜尋頁 */
-.card-category { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 42px 0 80px; }
-.card-category__top { display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
-.card-category__search { width: min(360px, 100%); padding: 12px 15px; border: 1px solid rgba(201,164,92,.55); border-radius: 8px; background: rgba(0,0,0,.25); color: inherit; font: inherit; }
-.card-category__count { opacity: .7; margin: 10px 0 18px; }
-.card-archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: clamp(14px, 2vw, 24px); }
-.archive-card { border: 0; padding: 0; background: transparent; color: inherit; cursor: pointer; text-align: center; font: inherit; }
-.archive-card img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 10px; transition: transform .2s ease, box-shadow .2s ease; }
-.archive-card:hover img, .archive-card:focus-visible img { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,.35); }
-.archive-card span { display: block; padding-top: 9px; opacity: .85; }
-.card-empty { grid-column: 1 / -1; opacity: .7; padding: 30px 0; }
-.card-modal[hidden] { display: none; }
-.card-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 24px; background: rgba(0,0,0,.88); }
-.card-modal__panel { position: relative; max-width: min(92vw, 620px); max-height: 92vh; }
-.card-modal__image { display: block; max-width: 100%; max-height: 88vh; object-fit: contain; border-radius: 8px; }
-.card-modal__close { position: absolute; right: -12px; top: -14px; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #f3ead8; color: #201a16; font-size: 24px; cursor: pointer; }
-body.modal-open { overflow: hidden; }
-@media (max-width: 560px) { .card-archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* =========================================
+   夜路・番婆｜卡牌分類圖鑑
+   card-category.css
+========================================= */
+
+
+/* =========================================
+   1. 分類圖鑑主要區域
+========================================= */
+
+.card-category {
+  position: relative;
+  z-index: 1;
+
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+
+  padding: 42px 0 80px;
+}
+
+
+/* =========================================
+   2. 分類頁標題
+========================================= */
+
+.card-category__heading {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 28px;
+}
+
+.card-category__heading h1 {
+  margin: 16px 0 8px;
+}
+
+.card-category__heading p {
+  opacity: 0.7;
+  line-height: 1.7;
+}
+
+.card-category__heading a {
+  color: var(--gold, #c9a45c);
+  text-decoration: none;
+
+  transition: opacity 0.2s ease;
+}
+
+.card-category__heading a:hover {
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   3. 卡牌類別下拉選單
+========================================= */
+
+/* 下拉選單外層 */
+
+.card-dropdown {
+  position: relative;
+  z-index: 10;
+
+  width: min(700px, 100%);
+  margin: 0 auto 24px;
+}
+
+/* 白色下拉按鈕 */
+
+.card-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  padding: 16px 26px;
+
+  border: none;
+  border-radius: 40px;
+
+  background: #f5f3f0;
+  color: #461212;
+
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-dropdown__trigger:hover {
+  background: #ffffff;
+}
+
+.card-dropdown__trigger:focus-visible {
+  outline: 2px solid var(--gold, #c9a45c);
+  outline-offset: 3px;
+}
+
+/* 下拉箭頭 */
+
+.card-dropdown__arrow {
+  display: inline-block;
+
+  transition: transform 0.25s ease;
+}
+
+/* 展開時箭頭旋轉 */
+
+.card-dropdown__trigger[aria-expanded="true"]
+.card-dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================
+   4. 紫色下拉選單面板
+========================================= */
+
+.card-dropdown__menu {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  left: 0;
+
+  width: 100%;
+  max-height: 320px;
+
+  padding: 14px 0;
+  overflow-y: auto;
+
+  border-radius: 28px;
+
+  background: #461212;
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.3);
+
+  z-index: 20;
+
+  animation: dropdown-open 0.25s ease;
+}
+
+/* 隱藏狀態 */
+
+.card-dropdown__menu[hidden] {
+  display: none;
+}
+
+
+/* =========================================
+   5. 下拉選單類別項目
+========================================= */
+
+.card-dropdown__item {
+  display: block;
+
+  width: 100%;
+  padding: 13px 26px;
+
+  border: none;
+
+  background: transparent;
+  color: #ffffff;
+
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+/* 滑鼠移入 */
+
+.card-dropdown__item:hover,
+.card-dropdown__item:focus-visible {
+  background: rgba(255, 255, 255, 0.15);
+  padding-left: 34px;
+
+  outline: none;
+}
+
+/* 目前選取的類別 */
+
+.card-dropdown__item.is-active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================================
+   6. 下拉選單展開動畫
+========================================= */
+
+@keyframes dropdown-open {
+
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================================
+   7. 卡牌數量文字
+========================================= */
+
+.card-category__count {
+  opacity: 0.7;
+
+  margin: 10px 0 18px;
+
+  font-size: 0.95rem;
+}
+
+
+/* =========================================
+   8. 卡牌排列網格
+========================================= */
+
+.card-archive-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(150px, 1fr));
+
+  gap: clamp(14px, 2vw, 24px);
+
+  align-items: start;
+}
+
+
+/* =========================================
+   9. 單張卡牌
+========================================= */
+
+.archive-card {
+  display: block;
+
+  border: 0;
+  padding: 0;
+
+  background: transparent;
+  color: inherit;
+
+  cursor: pointer;
+  text-align: center;
+
+  font: inherit;
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+/* 卡牌圖片 */
+
+.archive-card img {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* 滑鼠移入卡牌 */
+
+.archive-card:hover,
+.archive-card:focus-visible {
+  transform: translateY(-5px);
+  filter: brightness(1.08);
+}
+
+.archive-card:hover img,
+.archive-card:focus-visible img {
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.archive-card:focus-visible {
+  outline: 2px solid var(--gold, #c9a45c);
+  outline-offset: 4px;
+}
+
+/* 卡牌名稱 */
+
+.archive-card span {
+  display: block;
+
+  padding-top: 9px;
+
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   10. 卡牌圖片載入失敗
+========================================= */
+
+.archive-card.image-error img {
+  min-height: 150px;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(201, 164, 92, 0.5);
+}
+
+
+/* =========================================
+   11. 沒有卡牌資料時
+========================================= */
+
+.card-empty {
+  grid-column: 1 / -1;
+
+  opacity: 0.7;
+
+  padding: 30px 0;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   12. 卡牌放大檢視視窗
+========================================= */
+
+/* 隱藏狀態 */
+
+.card-modal[hidden] {
+  display: none;
+}
+
+/* 背景遮罩 */
+
+.card-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 2000;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.88);
+}
+
+/* 放大圖片容器 */
+
+.card-modal__panel {
+  position: relative;
+
+  width: fit-content;
+
+  max-width: min(92vw, 620px);
+  max-height: 92vh;
+}
+
+/* 放大卡牌圖片 */
+
+.card-modal__image {
+  display: block;
+
+  max-width: 100%;
+  max-height: 88vh;
+
+  object-fit: contain;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================
+   13. 放大視窗關閉按鈕
+========================================= */
+
+.card-modal__close {
+  position: absolute;
+
+  right: -12px;
+  top: -14px;
+
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #f3ead8;
+  color: #201a16;
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.card-modal__close:hover {
+  transform: scale(1.1);
+  background: #ffffff;
+}
+
+.card-modal__close:focus-visible {
+  outline: 2px solid var(--gold, #c9a45c);
+  outline-offset: 3px;
+}
+
+
+/* =========================================
+   14. 放大視窗開啟時禁止背景捲動
+========================================= */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* =========================================
+   15. Header 層級
+========================================= */
+
+/* 保留 common.css 原本的 position 設定 */
+
+.topbar {
+  z-index: 1000;
+}
+
+
+/* =========================================
+   16. 平板版面
+========================================= */
+
+@media (max-width: 768px) {
+
+  .card-category {
+    padding-top: 32px;
+  }
+
+  .card-archive-grid {
+    grid-template-columns:
+      repeat(auto-fill, minmax(135px, 1fr));
+  }
+
+  .card-dropdown {
+    width: min(100%, 600px);
+  }
+
+}
+
+
+/* =========================================
+   17. 手機版面
+========================================= */
+
+@media (max-width: 560px) {
+
+  .card-category {
+    width: calc(100% - 28px);
+
+    padding: 28px 0 60px;
+  }
+
+  /* 下拉選單 */
+
+  .card-dropdown {
+    width: 100%;
+  }
+
+  .card-dropdown__trigger {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+
+  .card-dropdown__menu {
+    max-height: 260px;
+    border-radius: 20px;
+  }
+
+  .card-dropdown__item {
+    padding: 13px 22px;
+  }
+
+  /* 卡牌網格 */
+
+  .card-archive-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+  /* 放大視窗 */
+
+  .card-modal {
+    padding: 16px;
+  }
+
+  .card-modal__panel {
+    max-width: 96vw;
+  }
+
+  .card-modal__image {
+    max-height: 85vh;
+  }
+
+  .card-modal__close {
+    right: -8px;
+    top: -12px;
+  }
+
+}
+
+
+/* =========================================
+   18. 減少動態效果
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card-dropdown__menu {
+    animation: none;
+  }
+
+  .card-dropdown__trigger,
+  .card-dropdown__arrow,
+  .card-dropdown__item,
+  .archive-card,
+  .archive-card img,
+  .card-modal__close {
+    transition: none;
+  }
+
+}

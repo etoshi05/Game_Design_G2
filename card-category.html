@@ -48,53 +48,49 @@
   <!-- 頁面主視覺 -->
   <section class="page-hero">
     <div class="wrap">
-
-      <div class="kicker">CARD ARCHIVE</div>
-
-      <h1>卡牌分類圖鑑</h1>
-
-      <p>
-        探索卡牌內容，尋找隱藏在夜路中的線索。
-      </p>
-
+      <div class="card-category__heading">
+        <a href="cards.html">← 返回卡牌圖鑑</a>
+        <h1 data-category-title>全部卡牌</h1>
+        <p>選擇卡牌類別，探索不同的秘密。</p>
+      </div>
     </div>
+    <!-- 類別下拉選單 -->
+      <div class="card-dropdown">
+
+        <button
+          class="card-dropdown__trigger"
+          type="button"
+          data-dropdown-trigger
+          aria-expanded="false"
+          aria-controls="cardDropdownMenu">
+
+          <span class="card-dropdown__arrow">▼</span>
+          <span data-dropdown-label>全部卡牌</span>
+
+        </button>
+
+        <div
+          class="card-dropdown__menu"
+          id="cardDropdownMenu"
+          data-dropdown-menu
+          hidden>
+        </div>
+
+      </div>
   </section>
+
 
   <main>
 
     <section class="card-category">
 
-      <div class="card-category__top">
 
-        <div>
-
-          <a href="cards.html">
-            ← 返回卡牌圖鑑
-          </a>
-
-          <h1 data-category-title>
-            卡牌圖鑑
-          </h1>
-
-        </div>
-
-        <!-- 卡牌搜尋 -->
-        <input
-          class="card-category__search"
-          data-card-search
-          type="search"
-          placeholder="搜尋卡牌名稱…"
-          aria-label="搜尋卡牌">
-
-      </div>
+      
 
       <!-- 卡牌數量 -->
-      <p
-        class="card-category__count"
-        data-card-count>
-      </p>
+      <p class="card-category__count" data-card-count></p>
 
-      <!-- 卡牌展示區 -->
+      <!-- 卡牌展示網格 -->
       <section
         class="card-archive-grid"
         data-card-grid
@@ -105,7 +101,7 @@
 
   </main>
 
-  <!-- 卡牌放大檢視視窗 -->
+  <!-- 卡牌放大視窗 -->
   <div
     class="card-modal"
     data-card-modal
@@ -132,6 +128,7 @@
     </div>
 
   </div>
+
 
   <!-- 網站頁尾 -->
   <footer class="footer">
