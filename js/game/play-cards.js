@@ -647,14 +647,34 @@
 
             P.save();
 
-            P.el.actionResult.textContent =
-                verification.message;
+            // 顯示規則卡的實際類型
+            const ruleTypeNames = {
+                true: "真規則",
+                false: "假規則",
+                conditional: "條件規則"
+            };
 
+            const ruleTypeName =
+                ruleTypeNames[verification.rule?.type] || "未知類型";
+
+            // 根據驗證結果顯示訊息
+            const verificationText = verification.valid
+                ? `驗證成功！這張是「${ruleTypeName}」。`
+                : `驗證失敗！這張是「${ruleTypeName}」。`;
+
+            P.el.actionResult.textContent = verificationText;
+
+            // 寫入遊戲紀錄
             P.addLog(
-                `${player.name} 驗證 ${card.id}：${verification.message}`
+                `${player.name} 驗證 ${card.id}：${verificationText}`
             );
 
             P.finishPlayerAction(player);
+            // 保留驗證結果，並附上行動切換提示
+            const nextActionMessage = P.el.actionResult.textContent;
+
+            P.el.actionResult.textContent =
+                `${verificationText}\n${nextActionMessage}`;
         });
 
 
