@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     previousPhase: $("previousPhase"),
     nextPhase: $("nextPhase"),
     previousRound: $("previousRound"),
-    nextRound: $("nextRound"),
 
     gameLog: $("gameLog")
   };
@@ -632,6 +631,10 @@ document.addEventListener("DOMContentLoaded", () => {
     el.activePlayer.addEventListener("change", () => {
         selectedInventoryItem = null;
         renderInventory();
+
+        if (gameData?.currentPhase === "action") {
+            renderPhase();
+        }
     });
   /* ==========================================
      動態建立卡牌選擇介面
@@ -1276,14 +1279,21 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (nextIndex !== -1) {
-      el.activePlayer.value = String(nextIndex);
+        el.activePlayer.value = String(nextIndex);
 
-      const nextPlayer = gameData.players[nextIndex];
+        const nextPlayer = gameData.players[nextIndex];
 
-      el.actionResult.textContent =
-        `${player.name} 已完成行動。下一位是 ${nextPlayer.name}（${nextPlayer.role}）。`;
+        // 更新目前玩家的背包
+        renderInventory();
 
-      addLog(`自動切換至 ${nextPlayer.name}。`);
+        // 更新玩家狀態及主持人提示
+        renderPlayers();
+        renderPhase();
+
+        el.actionResult.textContent =
+            `${player.name} 已完成行動。下一位是 ${nextPlayer.name}（${nextPlayer.role}）。`;
+
+        addLog(`自動切換至 ${nextPlayer.name}。`);
 
     } else {
       gameData.currentPhase = "settlement";
@@ -1400,21 +1410,6 @@ document.addEventListener("DOMContentLoaded", () => {
       verifyPicker.id = "verifyCardPicker";
       $("exploreCardResult").insertAdjacentElement("afterend", verifyPicker);
     }
-
-    if (!$("undoAction")) {
-      const undoButton = makeElement(
-        "button",
-        "secondary-btn",
-        "撤銷上一步"
-      );
-
-      undoButton.id = "undoAction";
-      undoButton.type = "button";
-
-      el.roundPanel.appendChild(undoButton);
-
-      undoButton.addEventListener("click", undoLastAction);
-    }
   }
 
 
@@ -1474,7 +1469,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     el.nextPhase.textContent =
       phase.id === "settlement" ? "結束本回合" : "下一階段";
-          // 檢查是否有玩家尚未行動
+      // 檢查是否有玩家尚未行動
       const unfinishedPlayers = gameData.players.filter(player =>
           !playerHasActed(player)
       );
@@ -1486,13 +1481,20 @@ document.addEventListener("DOMContentLoaded", () => {
       // 行動未完成時，禁止進入結算
       el.nextPhase.disabled = actionBlocked;
 
-      // 顯示紅色提醒
+      // 提示跟隨目前選擇的玩家
       if (phase.id === "action" && actionBlocked) {
-          const names = unfinishedPlayers.map(player => player.name);
+          const player = getActivePlayer();
 
-          el.hostHintText.textContent = pendingAction
-              ? "目前玩家尚未完成卡牌選擇及確認。"
-              : `${names.join("、")} 還未行動。`;
+          if (pendingAction) {
+              el.hostHintText.textContent =
+                  `${player?.name || "目前玩家"} 尚未完成行動，請完成卡牌選擇及確認。`;
+          } else if (player && !playerHasActed(player)) {
+              el.hostHintText.textContent =
+                  `${player.name} 尚未行動，請完成本回合行動。`;
+          } else {
+              el.hostHintText.textContent =
+                  "請選擇尚未行動的玩家。";
+          }
 
           el.hostHintText.style.color = "#e05252";
       } else {
@@ -1501,9 +1503,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
     el.previousRound.disabled = gameData.currentRound <= 1;
-
-    el.nextRound.disabled =
-      gameData.currentRound >= 6;
 
     if (phase.id === "event") {
       const eventResult = $("eventCardResult");
@@ -1715,7 +1714,9 @@ document.addEventListener("DOMContentLoaded", () => {
     addLog(`返回第 ${gameData.currentRound} 回合。`);
   }
 
-  el.nextRound.addEventListener("click", nextRound);
+  if (el.nextRound) {
+    el.nextRound.addEventListener("click", nextRound);
+  }
   el.previousRound.addEventListener("click", previousRound);
 
 

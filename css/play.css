@@ -379,10 +379,19 @@ button:disabled {
 }
 
 .player-card-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: start;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.player-card-top > div {
+    min-width: 0;
+}
+
+.player-card-top h3 {
+    overflow-wrap: anywhere;
 }
 
 .player-card h3 {
@@ -580,19 +589,22 @@ button:disabled {
   line-height: 1.8;
 }
 
-/* 階段及回合控制 */
 
-.phase-controls,
-.round-controls {
+/* 階段與回合控制：統一水平排列 */
+.control-row {
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 22px;
 }
 
-.round-controls {
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,.08);
+.control-row button {
+  flex: 1;
+  min-width: 120px;
+  min-height: 44px;
+  white-space: nowrap;
 }
 
 /* 遊戲紀錄 */
@@ -700,15 +712,17 @@ button:disabled {
     font-size: 18px;
   }
 
-  .phase-controls,
-  .round-controls {
+  .control-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
 
-  .phase-controls button,
-  .round-controls button {
-    flex: 1;
+  .control-row button {
+    width: 100%;
+    min-width: 0;
     padding: 10px 6px;
+    min-height: 46px;
     font-size: 11px;
   }
 }
@@ -885,12 +899,7 @@ button:disabled {
   width: 100%;
 }
 
-/* 撤銷按鈕 */
 
-#undoAction {
-  display: block;
-  margin: 18px auto 0;
-}
 
 /* 手機版卡牌選擇 */
 
@@ -1158,16 +1167,18 @@ button:disabled {
         min-height: 46px;
     }
 
-    /* 階段操作按鈕 */
-    .phase-controls,
-    .round-controls {
-        gap: 10px;
+    .control-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
 
-    .phase-controls button,
-    .round-controls button {
-        min-height: 46px;
-        font-size: 12px;
+    .control-row button {
+      width: 100%;
+      min-width: 0;
+      min-height: 46px;
+      padding: 10px 5px;
+      font-size: 12px;
     }
 }
 
@@ -1211,12 +1222,15 @@ button:disabled {
 }
 
 .player-action-status {
-    display: inline-block;
-    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
     padding: 5px 9px;
     border-radius: 20px;
     font-size: 11px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .player-current .player-action-status {
@@ -1256,4 +1270,60 @@ button:disabled {
 #actionResult[style*="rgb(224, 82, 82)"] {
     color: #e05252 !important;
     font-weight: 600;
+}
+/* 玩家狀態收合式面板 */
+
+.collapsible-panel {
+  padding: 25px 30px;
+}
+
+.collapsible-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.collapsible-heading::-webkit-details-marker {
+  display: none;
+}
+
+.collapsible-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.collapse-arrow {
+  color: #c3a36a;
+  font-size: 22px;
+  transition: transform .25s ease;
+}
+
+.collapsible-panel[open] .collapse-arrow {
+  transform: rotate(180deg);
+}
+
+.collapsible-panel[open] .player-grid {
+  margin-top: 25px;
+}
+
+@media (max-width: 767px) {
+  .collapsible-panel {
+    padding: 20px 15px;
+  }
+
+  .collapsible-heading {
+    gap: 10px;
+  }
+
+  .collapsible-right {
+    gap: 8px;
+  }
+
+  .collapse-arrow {
+    font-size: 20px;
+  }
 }

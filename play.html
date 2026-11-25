@@ -162,34 +162,17 @@
 
       </section>
 
-      <!-- =================================
-           第三區：玩家狀態
-      ================================== -->
-      <section class="host-panel" id="playersPanel" hidden>
-
-        <div class="panel-heading">
-          <div>
-            <div class="eyebrow">PLAYER STATUS</div>
-            <h2>03. 玩家狀態</h2>
-          </div>
-          <span class="panel-tag">即時紀錄</span>
-        </div>
-
-        <div class="player-grid" id="playerGrid">
-          <!-- JS 產生玩家資料 -->
-        </div>
-
-      </section>
+  
 
       <!-- =================================
-           第四區：回合操作
+           第三區：回合操作
       ================================== -->
       <section class="host-panel" id="roundPanel" hidden>
 
         <div class="panel-heading">
           <div>
             <div class="eyebrow">ROUND CONTROL</div>
-            <h2>04. 回合操作</h2>
+            <h2>03. 回合操作</h2>
           </div>
           <span class="round-badge" id="currentRoundBadge">
             第 1 回合
@@ -334,48 +317,68 @@
           </div>
 
           <!-- 階段控制 -->
-          <div class="phase-controls">
-            <button class="secondary-btn" id="previousPhase" disabled>
-              上一階段
-            </button>
+          <!-- 階段與回合控制 -->
+        <div class="control-row">
+          <button class="secondary-btn" id="previousPhase" disabled>
+            上一階段
+          </button>
 
-            <button class="primary-btn" id="nextPhase">
-              下一階段
-            </button>
-          </div>
+          <button class="primary-btn" id="nextPhase">
+            下一階段
+          </button>
 
-        </div>
-
-        <!-- 回合切換 -->
-        <div class="round-controls">
           <button class="secondary-btn" id="previousRound" disabled>
             上一回合
           </button>
 
-          <button class="primary-btn" id="nextRound">
-            結束本回合
-          </button>
         </div>
 
       </section>
+      <!-- =================================
+           第四區：玩家狀態
+      ================================== -->
+      <details class="host-panel collapsible-panel" id="playersPanel" open>
+
+        <summary class="panel-heading collapsible-heading">
+          <div>
+            <div class="eyebrow">PLAYER STATUS</div>
+            <h2>04. 玩家狀態</h2>
+          </div>
+
+          <div class="collapsible-right">
+            <span class="panel-tag">即時紀錄</span>
+            <span class="collapse-arrow">⌄</span>
+          </div>
+        </summary>
+
+        <div class="player-grid" id="playerGrid">
+          <!-- JS 產生玩家資料 -->
+        </div>
+
+      </details>
 
       <!-- =================================
            第五區：遊戲紀錄
       ================================== -->
-      <section class="host-panel" id="logPanel" hidden>
+      <details class="host-panel collapsible-panel" id="logPanel" open>
 
-        <div class="panel-heading">
+        <summary class="panel-heading collapsible-heading">
           <div>
             <div class="eyebrow">GAME RECORD</div>
             <h2>05. 遊戲紀錄</h2>
           </div>
-        </div>
+
+          <div class="collapsible-right">
+            <span class="panel-tag">即時紀錄</span>
+            <span class="collapse-arrow">⌄</span>
+          </div>
+        </summary>
 
         <div class="game-log" id="gameLog">
           <p>— 尚無遊戲紀錄。</p>
         </div>
 
-      </section>
+      </details>
 
       <!-- 重新開始 -->
       <div class="bottom-controls" id="bottomControls" hidden>
