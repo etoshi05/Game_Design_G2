@@ -481,3 +481,101 @@
   }
 
 }
+/* =========================================
+   G. 手機版角色切換自動定位
+========================================= */
+
+@media (max-width: 768px) {
+
+  /* 點擊下方角色卡牌後，預留導覽列空間 */
+  #characterInfo {
+    scroll-margin-top: 85px;
+  }
+
+}
+/* =========================================
+   G. 角色卡牌自動定位
+========================================= */
+
+.selected-card {
+  scroll-margin-top: 85px;
+}
+
+/* =========================================
+   G. 平板與手機版防止左右溢出
+========================================= */
+
+/* 全站防止水平捲動 */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* 所有元素限制在畫面範圍內 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 角色圖鑑 */
+.character-section {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* 卡牌展示廊 */
+.card-gallery {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* =========================================
+   平板與手機版
+========================================= */
+
+@media (max-width: 800px) {
+
+  /* 避免主要內容超出螢幕 */
+  .character-section,
+  .card-gallery {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 角色展示區 */
+  .character-display {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* 角色選擇卡牌 */
+  .character-options {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* 卡牌展示列限制在視窗內 */
+  .card-gallery__row {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* 保留原本卡牌左右移動動畫 */
+  .card-gallery__track {
+    width: max-content;
+    max-width: none;
+  }
+
+  /* 圖片不得超出容器 */
+  img {
+    max-width: 100%;
+  }
+
+}

@@ -188,6 +188,14 @@ if (
 
       button.classList.add('active');
 
+
+      if (selectedCardBox) {
+        selectedCardBox.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+
     });
 
   });
