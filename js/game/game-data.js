@@ -68,111 +68,127 @@ window.NIGHTROAD_GAME_DATA = (() => {
   );
 
 
-  // 規則卡：10 張
-  const rules = createCards(
-    "規則卡",
-    "RULE",
-    "rules",
-    [
-      { sheet: "03", count: 4 },
-      { sheet: "05", count: 6 }
-    ]
-  );
+    // 規則卡：10 張
+    const ruleNames = {
+        "RULE-01": "不要回應呼喚",
+        "RULE-02": "三次敲門",
+        "RULE-03": "熄燈後的走廊",
+        "RULE-04": "不要獨自前行",
+        "RULE-05": "村口的紅色標記",
+        "RULE-06": "午夜鐘聲",
+        "RULE-07": "不要撿拾地上的物品",
+        "RULE-08": "鏡中的自己",
+        "RULE-09": "老屋的燈",
+        "RULE-10": "不要相信陌生人的指引"
+    };
+
+    const rules = createCards(
+        "規則卡",
+        "RULE",
+        "rules",
+        [
+            { sheet: "03", count: 4 },
+            { sheet: "05", count: 6 }
+        ]
+    ).map(rule => ({
+        ...rule,
+        name: ruleNames[rule.id] || rule.name
+    }));
 
 
-  // 線索卡：12 張
-  // 線索卡：12 張
-const clueDefinitions = [
-    {
-        id: "CLUE-01",
-        name: "被撕去的日記",
-        sheet: "11",
-        imageNumber: "01",
-        type: "rule-evidence",
-        relatedRules: ["RULE-01", "RULE-02"]
-    },
-    {
-        id: "CLUE-02",
-        name: "山徑巡查紀錄",
-        sheet: "11",
-        imageNumber: "02",
-        type: "rule-evidence",
-        relatedRules: ["RULE-04", "RULE-05"]
-    },
-    {
-        id: "CLUE-03",
-        name: "走廊燈光紀錄",
-        sheet: "11",
-        imageNumber: "03",
-        type: "rule-evidence",
-        relatedRules: ["RULE-03", "RULE-06"]
-    },
-    {
-        id: "CLUE-04",
-        name: "遺失物品清單",
-        sheet: "11",
-        imageNumber: "04",
-        type: "rule-evidence",
-        relatedRules: ["RULE-07", "RULE-08"]
-    },
-    {
-        id: "CLUE-05",
-        name: "老屋訪客紀錄",
-        sheet: "11",
-        imageNumber: "05",
-        type: "rule-evidence",
-        relatedRules: ["RULE-09", "RULE-10"]
-    },
-    {
-        id: "CLUE-11",
-        name: "被遺忘的名字",
-        sheet: "11",
-        imageNumber: "06",
-        type: "legend"
-    },
-    {
-        id: "CLUE-06",
-        name: "山徑地圖",
-        sheet: "13",
-        imageNumber: "01",
-        type: "escape"
-    },
-    {
-        id: "CLUE-07",
-        name: "村口紀錄",
-        sheet: "13",
-        imageNumber: "02",
-        type: "escape"
-    },
-    {
-        id: "CLUE-08",
-        name: "破碎的路標",
-        sheet: "13",
-        imageNumber: "03",
-        type: "special"
-    },
-    {
-        id: "CLUE-09",
-        name: "遺留的車票",
-        sheet: "13",
-        imageNumber: "04",
-        type: "special"
-    },
-    {
-        id: "CLUE-10",
-        name: "出口旁的記號",
-        sheet: "13",
-        imageNumber: "05",
-        type: "special"
-    },
-    {
-        id: "CLUE-12",
-        name: "最後一頁",
-        sheet: "13",
-        imageNumber: "06",
-        type: "legend"
-    }
-];
+
+    // 線索卡：12 張
+    const clueDefinitions = [
+        {
+            id: "CLUE-01",
+            name: "被撕去的日記",
+            sheet: "11",
+            imageNumber: "01",
+            type: "rule-evidence",
+            relatedRules: ["RULE-01", "RULE-02"]
+        },
+        {
+            id: "CLUE-02",
+            name: "山徑巡查紀錄",
+            sheet: "11",
+            imageNumber: "02",
+            type: "rule-evidence",
+            relatedRules: ["RULE-04", "RULE-05"]
+        },
+        {
+            id: "CLUE-03",
+            name: "走廊燈光紀錄",
+            sheet: "11",
+            imageNumber: "03",
+            type: "rule-evidence",
+            relatedRules: ["RULE-03", "RULE-06"]
+        },
+        {
+            id: "CLUE-04",
+            name: "遺失物品清單",
+            sheet: "11",
+            imageNumber: "04",
+            type: "rule-evidence",
+            relatedRules: ["RULE-07", "RULE-08"]
+        },
+        {
+            id: "CLUE-05",
+            name: "老屋訪客紀錄",
+            sheet: "11",
+            imageNumber: "05",
+            type: "rule-evidence",
+            relatedRules: ["RULE-09", "RULE-10"]
+        },
+        {
+            id: "CLUE-11",
+            name: "被遺忘的名字",
+            sheet: "11",
+            imageNumber: "06",
+            type: "legend"
+        },
+        {
+            id: "CLUE-06",
+            name: "山徑地圖",
+            sheet: "13",
+            imageNumber: "01",
+            type: "escape"
+        },
+        {
+            id: "CLUE-07",
+            name: "村口紀錄",
+            sheet: "13",
+            imageNumber: "02",
+            type: "escape"
+        },
+        {
+            id: "CLUE-08",
+            name: "破碎的路標",
+            sheet: "13",
+            imageNumber: "03",
+            type: "special"
+        },
+        {
+            id: "CLUE-09",
+            name: "遺留的車票",
+            sheet: "13",
+            imageNumber: "04",
+            type: "special"
+        },
+        {
+            id: "CLUE-10",
+            name: "出口旁的記號",
+            sheet: "13",
+            imageNumber: "05",
+            type: "special"
+        },
+        {
+            id: "CLUE-12",
+            name: "最後一頁",
+            sheet: "13",
+            imageNumber: "06",
+            type: "legend"
+        }
+    ];
 
     const clues = clueDefinitions.map(card => ({
         id: card.id,

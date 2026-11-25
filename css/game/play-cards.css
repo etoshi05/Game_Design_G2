@@ -1,0 +1,187 @@
+
+/* ========================================
+   卡牌選擇區｜主持人操作台
+======================================== */
+
+.card-picker {
+  margin-top: 22px;
+  padding: 22px;
+  background: linear-gradient(
+    145deg,
+    rgba(40, 33, 29, .95),
+    rgba(20, 19, 18, .96)
+  );
+  border: 1px solid rgba(195, 163, 106, .3);
+  border-radius: 10px;
+  animation: card-picker-in .35s ease;
+}
+
+@keyframes card-picker-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-picker h3 {
+  margin: 0 0 10px;
+  color: #e8d5b2;
+  font-size: 17px;
+}
+
+.card-picker > p {
+  margin: 0 0 18px;
+  color: rgba(255,255,255,.58);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* 下拉選單 */
+
+.card-picker select,
+.setup-field-select {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin: 10px 0;
+  padding: 11px 13px;
+  color: #eadcc2;
+  background: #25211e;
+  border: 1px solid rgba(180,145,85,.4);
+  border-radius: 7px;
+  outline: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.card-picker select:focus,
+.setup-field-select:focus {
+  border-color: #c3a36a;
+  box-shadow: 0 0 12px rgba(195,163,106,.12);
+}
+
+.card-picker select option,
+.setup-field-select option {
+  color: #eadcc2;
+  background: #25211e;
+}
+
+/* 卡牌內容 */
+
+.selected-card-detail {
+  display: grid;
+  grid-template-columns: 150px minmax(0,1fr);
+  align-items: start;
+  gap: 8px 20px;
+  margin: 18px 0;
+  padding: 18px;
+  background: rgba(0,0,0,.2);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 8px;
+}
+
+.selected-card-detail:empty {
+  display: none;
+}
+
+.selected-card-detail h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  color: #e8d5b2;
+}
+
+.selected-card-detail p {
+  grid-column: 2;
+  margin: 0;
+  color: rgba(255,255,255,.68);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.selected-game-card {
+  grid-column: 1;
+  grid-row: 1 / span 5;
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 2 / 3;
+  object-fit: contain;
+  border-radius: 6px;
+  background: rgba(0,0,0,.25);
+  box-shadow: 0 8px 22px rgba(0,0,0,.3);
+}
+
+/* 確認按鈕 */
+
+.card-picker .primary-btn {
+  margin-top: 8px;
+}
+
+.card-picker .primary-btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* 事件卡顯示 */
+
+#eventCardResult,
+#exploreCardResult {
+  margin-top: 15px;
+}
+
+#eventCardPicker,
+#exploreCardPicker,
+#verifyCardPicker {
+  width: 100%;
+}
+
+/* 手機版卡牌選擇 */
+
+@media (max-width: 767px) {
+  .card-picker {
+    padding: 16px;
+  }
+
+  .selected-card-detail {
+    grid-template-columns: 100px minmax(0,1fr);
+    gap: 8px 12px;
+    padding: 12px;
+  }
+
+  .selected-game-card {
+    max-width: 100px;
+  }
+
+  .selected-card-detail h3 {
+    font-size: 14px;
+  }
+
+  .selected-card-detail p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .selected-card-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .selected-game-card {
+    grid-column: 1;
+    grid-row: auto;
+    width: 125px;
+    max-width: 100%;
+    margin: 0 auto 10px;
+  }
+
+  .selected-card-detail h3,
+  .selected-card-detail p {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}

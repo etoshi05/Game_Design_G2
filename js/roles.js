@@ -43,8 +43,27 @@ const characterData = {
     ability: '每場遊戲限使用一次。在自己的行動階段，選擇自己或同一地點的一名隊友，恢復 1 點精神值，精神值最高不能超過 4 點。',
     feature: '擅長維持團隊狀態。',
     number: 'ROLE 04'
-  }
+  },
 
+    guardian: {
+    name: '守護者',
+    image: 'assets/role/guardian-front.png',
+    back: 'assets/role/guardian-back.png',
+    abilityTitle: '角色能力｜穩定心神',
+    ability: '每場遊戲限使用一次。當自己或同一地點的一名隊友因事件效果失去精神值時，可以使用此能力，使該次精神值損失減少 1 點，最低為 0 點。',
+    feature: '擅長抵禦精神干擾，降低團隊受到的傷害。',
+    number: 'ROLE 05'
+  },
+
+  scout: {
+    name: '探路者',
+    image: 'assets/role/scout-front.png',
+    back: 'assets/role/scout-back.png',
+    abilityTitle: '角色能力｜深入搜尋',
+    ability: '每場遊戲限使用一次。進行探索時，可以額外取得該地點一張尚未取得的可用卡牌，但必須符合該地點的探索條件。',
+    feature: '擅長提高探索效率，協助團隊更快取得所需卡牌。',
+    number: 'ROLE 06'
+  }
 };
 
 

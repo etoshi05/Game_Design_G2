@@ -10,7 +10,23 @@
   <title>主持人操作台｜夜路・番婆</title>
 
   <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/play.css">
+    <!-- 主持人操作台 -->
+  <link rel="stylesheet" href="css/game/play-layout.css">
+
+  <!-- 卡牌選擇區 -->
+  <link rel="stylesheet" href="css/game/play-cards.css">
+
+  <!-- 玩家道具背包 -->
+  <link rel="stylesheet" href="css/game/play-inventory.css">
+
+  <!-- 手機與平板排版 -->
+  <link rel="stylesheet" href="css/game/play-responsive.css">
+
+  <!-- 玩家行動狀態 -->
+  <link rel="stylesheet" href="css/game/play-player-status.css">
+
+  <!-- 懷錶倒數計時器 -->
+  <link rel="stylesheet" href="css/game/play-timer.css">
 </head>
 
 <body>
@@ -80,7 +96,6 @@
           <div class="setup-field">
             <label for="playerCount">遊玩人數</label>
             <select id="playerCount">
-              <option value="4">4 位玩家</option>
               <option value="5">5 位玩家</option>
               <option value="6">6 位玩家</option>
             </select>
@@ -98,7 +113,7 @@
         <!-- 角色分配 -->
         <div class="sub-heading">
           <h3>玩家角色分配</h3>
-          <p>4 人遊玩時自動分配四種角色；5～6 人請由主持人確認角色。</p>
+          <p>依照玩家人數自動分配角色，每位玩家使用不同角色。</p>
         </div>
 
         <div class="player-setup-grid" id="playerSetupGrid">
@@ -399,12 +414,37 @@
       僅供課程展示、學習與非商業遊玩使用。© 2026 設計團隊。
     </div>
   </footer>
+  <!-- 共用網站程式 -->
   <script src="js/common.js"></script>
+
+  <!-- 遊戲核心模組 -->
   <script src="js/game/game-data.js"></script>
   <script src="js/game/game-state.js"></script>
   <script src="js/game/game-history.js"></script>
   <script src="js/game/game-card-selector.js"></script>
+  
+  <script src="js/game/effects-core.js"></script>
+  <script src="js/game/effects-rules.js"></script>
+  <script src="js/game/effects-player.js"></script>
+  <script src="js/game/effects-items.js"></script>
+  <script src="js/game/effects-clues.js"></script>
+  <script src="js/game/effects-events.js"></script>
+  <script src="js/game/effects-cards.js"></script>
+  <script src="js/game/effects-escape.js"></script>
   <script src="js/game/game-card-effects.js"></script>
-  <script src="js/play.js"></script>
-</body>
+
+  <!-- 主持人操作台：共用設定與工具 -->
+  <script src="js/game/play-config.js"></script>
+  <script src="js/game/play-utils.js"></script>
+
+  <!-- 主持人操作台：功能模組 -->
+  <script src="js/game/play-setup.js"></script>
+  <script src="js/game/play-render.js"></script>
+  <script src="js/game/play-inventory.js"></script>
+  <script src="js/game/play-cards.js"></script>
+  <script src="js/game/play-actions.js"></script>
+  <script src="js/game/play-round.js"></script>
+  <script src="js/game/play-timer.js"></script>
+  <!-- 主程式：最後載入 -->
+  <script src="js/game/play.js"></script>
 </html>

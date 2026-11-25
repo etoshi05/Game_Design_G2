@@ -9,6 +9,7 @@ window.NIGHTROAD_STATE = (() => {
 
   let state = null;
 
+  // 建立玩家
   function createPlayer(id, role) {
     return {
       id,
@@ -23,7 +24,24 @@ window.NIGHTROAD_STATE = (() => {
     };
   }
 
+  // 建立遊戲
   function createGame(playerRoles) {
+
+    // 檢查玩家人數
+    if (!Array.isArray(playerRoles) ||
+        ![5, 6].includes(playerRoles.length)) {
+      throw new Error("遊戲人數必須為 5～6 人！");
+    }
+
+    // 檢查角色是否重複
+    if (new Set(playerRoles).size !== playerRoles.length) {
+      throw new Error("角色不可重複，每位玩家必須使用不同角色！");
+    }
+
+    // 檢查角色是否為空
+    if (playerRoles.some(role => !role)) {
+      throw new Error("請完成所有玩家的角色分配！");
+    }
 
     state = {
       started: true,
@@ -103,6 +121,8 @@ window.NIGHTROAD_STATE = (() => {
       if (
         data.started !== true ||
         !Array.isArray(data.players) ||
+        ![5, 6].includes(data.players.length) ||
+        new Set(data.players.map(p => p.role)).size !== data.players.length ||
         !Array.isArray(data.hiddenRules) ||
         !Array.isArray(data.logs) ||
         !Array.isArray(data.history)

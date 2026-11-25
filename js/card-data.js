@@ -7,7 +7,9 @@ window.NIGHTROAD_CARD_CATEGORIES = [
       "assets/cards/roles/sheet01-card01.png",
       "assets/cards/roles/sheet01-card02.png",
       "assets/cards/roles/sheet01-card03.png",
-      "assets/cards/roles/sheet01-card04.png"
+      "assets/cards/roles/sheet01-card04.png",
+      "assets/cards/roles/sheet01-card05.png",
+      "assets/cards/roles/sheet01-card06.png"
     ]
   },
   {

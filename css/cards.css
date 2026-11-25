@@ -140,14 +140,11 @@
 
 .character-options {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   max-width: 900px;
-
   margin: 0 auto;
 }
-
 
 /* 5. 角色卡牌外框 */
 
@@ -408,8 +405,8 @@
   }
 
   .character-options {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 
   .character-info {
@@ -417,7 +414,6 @@
   }
 
 }
-
 
 /* =========================================
    D. 手機版 RWD
@@ -443,6 +439,12 @@
 
 }
 
+@media (max-width: 480px) {
+  .character-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
 
 /* =========================================
    E. 卡牌展示廊平板與手機版
